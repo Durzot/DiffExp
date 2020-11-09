@@ -1,6 +1,10 @@
+# Project specific
+tools/DESeq2paper/data
+
+
 # Tex build
-build/**/*.*
-!build/**/*.pdf
+docs/**/build/**/*.*
+!docs/**/build/**/*.pdf
 
 
 # Specs
