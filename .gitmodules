@@ -1,0 +1,3 @@
+[submodule "tools/DESeq2"]
+	path = tools/DESeq2
+	url = https://github.com/mikelove/DESeq2

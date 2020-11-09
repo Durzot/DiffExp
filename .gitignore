@@ -1,0 +1,36 @@
+# Tex build
+build/**/*.*
+!build/**/*.pdf
+
+
+# Specs
+.tool-versions
+
+# Logs 
+log/
+*.log
+*.coverage
+*.coveragerc
+
+# Envs
+renv/
+
+# Mac anc Vim specific
+.DS_Store
+.DS_Store?
+*.m~
+*.*swp
+*.*swo
+
+# Python
+__pycache__/
+*.pyc
+
+# Compiled sources
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+.Rproj.user
