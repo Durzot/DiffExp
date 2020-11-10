@@ -1,0 +1,482 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AE	inst/script/simulateLFCAccuracy.R	/^        AE <- abs(beta - predbeta)$/;"	v
+Conditions	inst/script/runScripts.R	/^                    Conditions = pData(e)$condition,$/;"	v
+DiffMAE	inst/script/simulateLFCAccuracy.R	/^        DiffMAE <- mean(AE[nz & de])$/;"	v
+DiffRMSE	inst/script/simulateLFCAccuracy.R	/^        DiffRMSE <- sqrt(mean(SE[nz & de]))$/;"	v
+MAE	inst/script/simulateLFCAccuracy.R	/^        MAE <- mean(AE[nz])$/;"	v
+RMSE	inst/script/simulateLFCAccuracy.R	/^        RMSE <- sqrt(mean(SE[nz]))$/;"	v
+X	inst/script/runScripts.R	/^  X <- as.matrix(exprs(e))$/;"	v
+a	inst/doc/rlogHammer.R	/^      a <- attributes(n)$/;"	v
+a1	inst/doc/posterior.R	/^a1 <- disps[1]$/;"	g
+a2	inst/doc/posterior.R	/^a2 <- disps[2]$/;"	g
+algorithm	inst/script/simulateOutliers.R	/^               algorithm = rep(methods, each=length(pvalsVector)),$/;"	v
+algos	inst/script/bottomly/diffExpr.R	/^algos <- list("DESeq"=runDESeq,"DESeq2"=runDESeq2,"edgeR"=runEdgeR,"edgeR-robust"=runEdgeRRobust,$/;"	g
+algos	inst/script/pickrell/diffExpr.R	/^algos <- list("DESeq"=runDESeq,"DESeq2"=runDESeq2,"edgeR"=runEdgeR,"edgeR-robust"=runEdgeRRobust,$/;"	g
+algos	inst/script/simulateDE.R	/^algos <- list("DESeq"=runDESeq,"DESeq2"=runDESeq2,"edgeR"=runEdgeR,"edgeR-robust"=runEdgeRRobust,$/;"	g
+algos	inst/script/simulateLFCAccuracy.R	/^algos <- list("DESeq2"=runDESeq2,"edgeR"=runEdgeR,"GFOLD"=runGFOLD)$/;"	g
+algos	inst/script/simulateOutliers.R	/^algos <- list("DESeq2"=runDESeq2Outliers,$/;"	g
+alpha	inst/doc/expVarLogDisp.R	/^  alpha <- alphas[i]$/;"	v
+alpha	inst/doc/sensitivityPrecision.R	/^      alpha <- alphas[ lessTarget[length(lessTarget)] ]$/;"	v
+alphas	inst/doc/expVarLogDisp.R	/^alphas <- rep(c(.05,.2), 5)$/;"	g
+alphas	inst/doc/sensitivityPrecision.R	/^alphas <- exp(seq(from=log(.001), to=log(.2), length=100))$/;"	g
+asymptDisp	inst/doc/meanDispPairs.R	/^asymptDisp <- attr(dispersionFunction(ddspickrell),"coefficients")["asymptDisp"]$/;"	g
+asymptDispB	inst/doc/dispShrink.R	/^asymptDispB <- attr(dispersionFunction(ddsB),"coefficients")["asymptDisp"]$/;"	g
+asymptDispP	inst/doc/dispShrink.R	/^asymptDispP <- attr(dispersionFunction(ddsP),"coefficients")["asymptDisp"]$/;"	g
+average.Jaccard	inst/doc/sensitivityPrecision.R	/^average.Jaccard <- apply(j,c(1,2),mean)$/;"	g
+average.Jaccard	inst/doc/sensitivityPrecision.R	/^average.Jaccard <- as.dist(average.Jaccard)$/;"	g
+bamLst	inst/script/bottomly/countReads.R	/^bamLst <- BamFileList(fls,yieldSize=100000)$/;"	g
+bamLst	inst/script/pickrell/countReads.R	/^bamLst <- BamFileList(fls,yieldSize=100000)$/;"	g
+baseMean	inst/doc/largeLFCSimulation.R	/^  baseMean <- rowMeans(K)$/;"	v
+beta	inst/doc/dispImprove.R	/^beta <- rep(0,n)$/;"	g
+beta	inst/doc/largeLFCSimulation.R	/^beta <- c(rep(0, n * 8\/10), sample(c(-es,es), n * 2\/10, TRUE))$/;"	g
+beta	inst/script/runScripts.R	/^       beta = res$log2fdc)$/;"	v
+beta	inst/script/runScripts.R	/^  beta <- log2(samfit$samr.obj$foldchange)$/;"	v
+beta	inst/script/runScripts.R	/^  beta <- res$log2FoldChange$/;"	v
+beta	inst/script/simulateCluster.R	/^        beta <- replicate(k, c(rep(0,8\/10 * n), rnorm(2\/10 * n, 0, rnormsd)))$/;"	v
+beta	inst/script/simulateDE.R	/^  beta <- c(rep(0, n * 8\/10), sample(c(-es,es), n * 2\/10, TRUE))$/;"	v
+beta	inst/script/simulateLFCAccuracy.R	/^        beta <- c(rep(0, n * 8\/10), runif(n * 2\/10, -4, 4))$/;"	v
+beta	inst/script/simulateLFCAccuracy.R	/^        beta <- c(rep(0, n * 8\/10), sample(c(-2, 2), n * 2\/10, TRUE))$/;"	v
+beta	inst/script/simulateOutliers.R	/^      beta <- c(rep(0, n * 8\/10), sample(c(-1,1), n * 2\/10, TRUE))$/;"	v
+betaPriorVar	inst/doc/posterior.R	/^betaPriorVar <- attr(ddsPrior,"betaPriorVar")$/;"	g
+betafull	inst/script/makeSim.R	/^  betafull <- cbind(log2(mu0), beta)$/;"	v
+bins	inst/doc/dispShrink.R	/^  bins <- 10^seq(from=0, to=5, length=20)$/;"	v
+bins	inst/doc/dispShrink.R	/^  bins <- 10^seq(from=1, to=4, length=6)$/;"	v
+callsTest	inst/doc/sensitivityPrecision.R	/^  callsTest <- sapply(1:nreps, function(i) {$/;"	v
+catFn	inst/doc/stableLFC.R	/^catFn <- function(n, l) {$/;"	f
+cds	inst/script/runScripts.R	/^  cds <- DESeq::estimateDispersions(cds)$/;"	v
+cds	inst/script/runScripts.R	/^  cds <- DESeq::estimateSizeFactors(cds)$/;"	v
+cds	inst/script/runScripts.R	/^  cds <- newCountDataSet(exprs(e), pData(e)$condition)$/;"	v
+colLab	inst/doc/rlogHammer.R	/^  colLab <- function(n) {$/;"	f
+cols	inst/doc/marginalIndep.R	/^  cols <- colorRampPalette(c("purple","blue"))(nlevels(qs))$/;"	v
+cols	inst/doc/stableLFC.R	/^  cols <- ifelse(s,rgb(1,0,0,.5),rgb(0,0,0,.2))$/;"	v
+common	inst/script/bottomly/diffExpr.R	/^    common <- intersect(rownames(eset),rownames(cuffResTest))$/;"	v
+common	inst/script/pickrell/diffExpr.R	/^  common <- intersect(rownames(eset),rownames(cuffResTest))$/;"	v
+cond	inst/doc/posterior.R	/^cond <- as.numeric(colData(dds)$strain) - 1$/;"	g
+condition	inst/script/simulateCluster.R	/^        condition <- droplevels(condition0[5:20])$/;"	v
+conversion	inst/script/bottomly/getPheno.R	/^conversion <- read.table("sra_conversion.txt")$/;"	g
+conversion	inst/script/bottomly/getPheno.R	/^conversion <- sraConvert(in_acc = samples$sample.id, out_type =$/;"	g
+conversion	inst/script/pickrell/getPheno.R	/^conversion <- read.table("sra_conversion.txt")$/;"	g
+conversion	inst/script/pickrell/getPheno.R	/^conversion <- sraConvert(in_acc = samples$sra, out_type =$/;"	g
+cuffDir	inst/script/bottomly/diffExpr.R	/^    cuffDir <- "\/g\/huber\/projects\/bottomly\/cuffdiff_results\/"$/;"	v
+cuffDir	inst/script/pickrell/diffExpr.R	/^  cuffDir <- "\/g\/huber\/projects\/pickrell\/cuffdiff_results\/"$/;"	v
+cuffResHeldout	inst/script/bottomly/diffExpr.R	/^    cuffResHeldout <- read.table(paste0(cuffDir,"cuffdiff_random_heldoutset_",i,"\/gene_exp.diff"),header=TRUE)$/;"	v
+cuffResTest	inst/script/bottomly/diffExpr.R	/^    cuffResTest <- read.table(paste0(cuffDir,"cuffdiff_random_testset_",i,"\/gene_exp.diff"),header=TRUE)$/;"	v
+cuffResTest	inst/script/pickrell/diffExpr.R	/^  cuffResTest <- read.table(paste0(cuffDir,"cuffdiff_random_",i,"\/gene_exp.diff"),header=TRUE)$/;"	v
+cuts	inst/doc/marginalIndep.R	/^cuts <- c(10, round(quantile(df$mean[df$mean > 10], 1:(nq-1)\/nq)))$/;"	g
+d	inst/doc/expVarLogDisp.R	/^  d <- rbind(d, data.frame(m=m,p=p,alpha=alpha,theorvar=theorvar,samplevar=samplevar))$/;"	v
+d	inst/doc/expVarLogDisp.R	/^d <- data.frame()$/;"	g
+d	inst/doc/largeLFCSimulation.R	/^d <- data.frame(log10mu=log10(sim$mu0), beta=beta)$/;"	g
+d	inst/doc/rlogHammer.R	/^  d <- dist(t(matrix))$/;"	v
+d	inst/doc/sensitivityPrecision.R	/^d <- data.frame(heldoutCalls=as.vector(heldMat),$/;"	g
+d	inst/doc/sensitivityPrecision.R	/^d <- data.frame(sensMelt, precision=precMelt$precision)$/;"	g
+d	inst/doc/specificity.R	/^d <- data.frame(fpr=as.vector(resMat),$/;"	g
+data	inst/doc/dispImprove.R	/^data <- data[data[,"genewise"] > -7,]$/;"	g
+data	inst/doc/dispImprove.R	/^data <- log10(cbind("genewise"=mcols(dds)$dispGeneEst,$/;"	g
+data	inst/doc/largeLFCSimulation.R	/^  data <- data.frame(log10baseMean = log10(baseMean), lfc=lfc)$/;"	v
+dds	inst/doc/cooksDist.R	/^dds <- DESeq(dds)$/;"	g
+dds	inst/doc/cooksDist.R	/^dds <- DESeqDataSetFromMatrix(assay(bottomly), DataFrame(colData(bottomly)), ~ strain)$/;"	g
+dds	inst/doc/cooksDist.R	/^dds <- dds[,c(8:11,15:17,12:14,18:21)]$/;"	g
+dds	inst/doc/dispImprove.R	/^dds <- DESeq(dds)$/;"	g
+dds	inst/doc/dispImprove.R	/^dds <- DESeqDataSetFromMatrix(mat, DataFrame(condition), ~ condition)$/;"	g
+dds	inst/doc/expVarLogDisp.R	/^  dds <- estimateDispersionsGeneEst(dds)$/;"	v
+dds	inst/doc/expVarLogDisp.R	/^  dds <- makeExampleDESeqDataSet(n=4000,m=m,interceptMean=10,$/;"	v
+dds	inst/doc/lfcThreshold.R	/^dds <- DESeq(dds)$/;"	g
+dds	inst/doc/lfcThreshold.R	/^dds <- DESeqDataSetFromMatrix(assay(bottomly), DataFrame(colData(bottomly)), ~ strain)$/;"	g
+dds	inst/doc/posterior.R	/^dds <- DESeqDataSetFromMatrix(assay(bottomly), DataFrame(colData(bottomly)), ~ strain)$/;"	g
+dds	inst/doc/rlogHammer.R	/^dds <- DESeqDataSetFromMatrix(exprs(e), pData(e), ~ 1)$/;"	g
+dds	inst/doc/rlogHammer.R	/^dds <- dds[rowSums(counts(dds)) > 0,]$/;"	g
+dds	inst/doc/rlogHammer.R	/^dds <- estimateSizeFactors(dds)$/;"	g
+dds	inst/doc/stableLFC.R	/^dds <- DESeqDataSetFromMatrix(assay(bottomly), colData(bottomly), ~ experiment.number + strain)$/;"	g
+dds	inst/doc/stableLFC.R	/^dds <- dds[rowSums(counts(dds)) > 0,]$/;"	g
+dds	inst/script/runScripts.R	/^  dds <- DESeq(dds,quiet=TRUE)$/;"	v
+dds	inst/script/runScripts.R	/^  dds <- DESeqDataSetFromMatrix(exprs(e), DataFrame(pData(e)), ~ condition)$/;"	v
+dds	inst/script/simulateCluster.R	/^        dds <- DESeqDataSetFromMatrix(mat, DataFrame(condition), ~ 1)$/;"	v
+dds	inst/script/simulateCluster.R	/^        dds <- estimateDispersionsGeneEst(dds)$/;"	v
+dds	inst/script/simulateCluster.R	/^        dds <- estimateSizeFactors(dds)$/;"	v
+dds1	inst/doc/marginalIndep.R	/^dds1 <- DESeq(dds1)$/;"	g
+dds1	inst/doc/marginalIndep.R	/^dds1 <- DESeqDataSetFromMatrix(mat, DataFrame(condition), ~ condition)$/;"	g
+dds2	inst/doc/marginalIndep.R	/^dds2 <- DESeq(dds2)$/;"	g
+dds2	inst/doc/marginalIndep.R	/^dds2 <- DESeqDataSetFromMatrix(mat, DataFrame(condition), ~ condition)$/;"	g
+ddsB	inst/doc/dispShrink.R	/^ddsB <- DESeqDataSetFromMatrix(assay(bottomly)[,idx], $/;"	g
+ddsB	inst/doc/dispShrink.R	/^ddsB <- estimateDispersions(ddsB)$/;"	g
+ddsB	inst/doc/dispShrink.R	/^ddsB <- estimateSizeFactors(ddsB)$/;"	g
+ddsDefault	inst/script/runScripts.R	/^  ddsDefault <- DESeq(dds, quiet=TRUE)$/;"	v
+ddsList	inst/doc/stableLFC.R	/^ddsList <- list(dds[,idx], dds[,-idx])$/;"	g
+ddsNoPrior	inst/doc/lfcThreshold.R	/^ddsNoPrior <- DESeq(dds, betaPrior=FALSE)$/;"	g
+ddsNoPrior	inst/doc/posterior.R	/^ddsNoPrior <- nbinomWaldTest(ddsPrior,betaPrior=FALSE)$/;"	g
+ddsNoRepl	inst/script/runScripts.R	/^  ddsNoRepl <- ddsDefault$/;"	v
+ddsNoReplace	inst/doc/cooksDist.R	/^ddsNoReplace <- DESeq(dds, minReplicatesForReplace=Inf)$/;"	g
+ddsP	inst/doc/dispShrink.R	/^ddsP <- DESeqDataSetFromMatrix(assay(pickrell)[,idx], $/;"	g
+ddsP	inst/doc/dispShrink.R	/^ddsP <- estimateDispersions(ddsP)$/;"	g
+ddsP	inst/doc/dispShrink.R	/^ddsP <- estimateSizeFactors(ddsP)$/;"	g
+ddsPrior	inst/doc/posterior.R	/^ddsPrior <- DESeq(dds,minReplicatesForReplace=Inf)$/;"	g
+ddsSim	inst/doc/meanDispPairs.R	/^ddsSim <- DESeqDataSetFromMatrix(nbdata, DataFrame(row.names=seq_len(m)), ~1)$/;"	g
+ddsSim	inst/doc/meanDispPairs.R	/^ddsSim <- estimateDispersionsGeneEst(ddsSim)$/;"	g
+ddsSim	inst/doc/meanDispPairs.R	/^ddsSim <- estimateSizeFactors(ddsSim)$/;"	g
+ddspickrell	inst/doc/meanDispPairs.R	/^ddspickrell <- DESeqDataSet(pickrell, ~ 1)$/;"	g
+ddspickrell	inst/doc/meanDispPairs.R	/^ddspickrell <- estimateDispersionsFit(ddspickrell)$/;"	g
+ddspickrell	inst/doc/meanDispPairs.R	/^ddspickrell <- estimateDispersionsGeneEst(ddspickrell)$/;"	g
+ddspickrell	inst/doc/meanDispPairs.R	/^ddspickrell <- estimateSizeFactors(ddspickrell)$/;"	g
+de	inst/script/simulateLFCAccuracy.R	/^        de <- beta != 0$/;"	v
+deseqNoPrior	inst/doc/posterior.R	/^deseqNoPrior <- results(ddsNoPrior[genes,])$log2FoldChange$/;"	g
+deseqPrior	inst/doc/posterior.R	/^deseqPrior <- results(ddsPrior[genes,])$log2FoldChange$/;"	g
+deseqPriorSE	inst/doc/posterior.R	/^deseqPriorSE <- results(ddsPrior[genes,])$lfcSE$/;"	g
+design	inst/script/runScripts.R	/^  design <- model.matrix(~ condition, pData(e))$/;"	v
+design	inst/script/runScripts.R	/^  design <- model.matrix(~ pData(e)$condition)$/;"	v
+df	inst/doc/marginalIndep.R	/^df <- data.frame(mean=res1$baseMean, pvalue=res1$pvalue)$/;"	g
+df	inst/doc/marginalIndep.R	/^df <- data.frame(mean=res2$baseMean, pvalue=res2$pvalue)$/;"	g
+dgel	inst/script/runScripts.R	/^  dgel <- DGEList(exprs(e))$/;"	v
+dgel	inst/script/runScripts.R	/^  dgel <- estimateGLMCommonDisp(dgel, design)$/;"	v
+dgel	inst/script/runScripts.R	/^  dgel <- estimateGLMRobustDisp(dgel, design, maxit=6)$/;"	v
+dgel	inst/script/runScripts.R	/^  dgel <- estimateGLMTagwiseDisp(dgel, design)$/;"	v
+dgel	inst/script/runScripts.R	/^  dgel <- estimateGLMTrendedDisp(dgel, design)$/;"	v
+disp	inst/doc/expVarLogDisp.R	/^  disp <- mcols(dds)$dispGeneEst$/;"	v
+dispScale	inst/script/simulateCluster.R	/^  dispScale <- dispScales[idx]$/;"	v
+dispScales	inst/script/simulateCluster.R	/^dispScales <- c(.1, .25, 1)$/;"	g
+disps	inst/doc/posterior.R	/^disps <- dispersions(ddsNoPrior[genes,])$/;"	g
+down	inst/doc/dispShrink.R	/^  down <- sapply(seq_along(bins[-1]), function(i) pickone(mcols(dds)$dispGeneEst > 1e-4 & !mcols(dds)$dispOutlier & mcols(dds)$dispGeneEst < mcols(dds)$dispFit & mcols(dds)$baseMean > bins[i] & mcols(dds)$baseMean < bins[i+1]))$/;"	v
+e	inst/doc/rlogHammer.R	/^e <- hammer.eset$/;"	g
+e	inst/script/simulateDE.R	/^  e <- ExpressionSet(mat, AnnotatedDataFrame(data.frame(condition)))$/;"	v
+e	inst/script/simulateLFCAccuracy.R	/^      e <- ExpressionSet(mat, AnnotatedDataFrame(data.frame(condition)))$/;"	v
+e	inst/script/simulateOutliers.R	/^      e <- ExpressionSet(mat, AnnotatedDataFrame(data.frame(condition)))$/;"	v
+eHeldout	inst/script/bottomly/diffExpr.R	/^    eHeldout <- eset[,heldOutSet]$/;"	v
+eTest	inst/script/bottomly/diffExpr.R	/^    eTest <- eset[,testSet]$/;"	v
+eTest	inst/script/pickrell/diffExpr.R	/^  eTest <- eset[,testSet]$/;"	v
+each	inst/script/simulateCluster.R	/^condition0 <- factor(rep(c("null","A","B","C","D"), each = m\/(k+1)))$/;"	v
+edger.fit	inst/script/runScripts.R	/^  edger.fit <- glmFit(dgel, design)$/;"	v
+edger.lrt	inst/script/runScripts.R	/^  edger.lrt <- glmLRT(edger.fit)$/;"	v
+edgerARI	inst/script/simulateCluster.R	/^        edgerARI <- adjustedRandIndex(condition, cutree(hclust(edgerBCV),k=k))$/;"	v
+edgerBCV	inst/script/simulateCluster.R	/^        edgerBCV <- as.dist(noplotMDS(calcNormFactors(DGEList(mat)), method="bcv"))$/;"	v
+effSizeLevels	inst/script/simulateDE.R	/^effSizeLevels <- log2(c(2,3,4))$/;"	g
+effSizes	inst/script/simulateDE.R	/^effSizes <- rep(rep(effSizeLevels, each=nreps), times=length(mLevels))$/;"	g
+es	inst/script/simulateDE.R	/^  es <- effSizes[i]$/;"	v
+eset	inst/script/bottomly/diffExpr.R	/^eset <- ExpressionSet(assay(se),$/;"	g
+eset	inst/script/pickrell/diffExpr.R	/^eset <- ExpressionSet(assay(se),$/;"	g
+exonsByGene	inst/script/bottomly/countReads.R	/^exonsByGene <- exonsBy(hse, by="gene")$/;"	g
+exonsByGene	inst/script/pickrell/countReads.R	/^exonsByGene <- exonsBy(hse, by="gene")$/;"	g
+fdr	inst/doc/sensitivityPrecision.R	/^    fdr <- sapply(1:nreps, function(i) {$/;"	v
+fit	inst/script/runScripts.R	/^  fit <- eBayes(fit)$/;"	v
+fls	inst/script/bottomly/countReads.R	/^fls <- paste0("tophat_out\/",goodSet,"\/accepted_hits.bam")$/;"	g
+fls	inst/script/pickrell/countReads.R	/^fls <- paste0("tophat_out\/",goodSet$run,"\/accepted_hits.bam")$/;"	g
+genes	inst/doc/posterior.R	/^## genes <- rownames(ddsNoPrior)[with(results(ddsNoPrior), identify(baseMean, log2FoldChange))]$/;"	v
+genes	inst/doc/posterior.R	/^genes <- c("ENSMUSG00000081504", "ENSMUSG00000092968")$/;"	g
+genesGTF	inst/script/bottomly/countReads.R	/^genesGTF <- "\/tophatindices\/Mus_musculus\/Ensembl\/NCBIM37\/Annotation\/Genes\/genes.gtf"$/;"	g
+genesGTF	inst/script/pickrell/countReads.R	/^genesGTF <- "\/tophatindices\/Homo_sapiens\/Ensembl\/GRCh37\/Annotation\/Genes\/genes.gtf"$/;"	g
+getHeldoutCalls	inst/doc/sensitivityPrecision.R	/^getHeldoutCalls <- function(alpha) {$/;"	f
+getPrecisionAlgoGold	inst/doc/sensitivityPrecision.R	/^getPrecisionAlgoGold <- function(alpha, alphaOut, gold) {$/;"	f
+getSensitivityAlgoGold	inst/doc/sensitivityPrecision.R	/^getSensitivityAlgoGold <- function(alpha, alphaOut, gold) {$/;"	f
+getTestCalls	inst/doc/sensitivityPrecision.R	/^getTestCalls <- function(alpha) {$/;"	f
+goodSet	inst/script/bottomly/countReads.R	/^goodSet <- list.files("tophat_out")$/;"	g
+goodSet	inst/script/pickrell/countReads.R	/^goodSet <- read.table("good_set.txt")$/;"	g
+goodSet	inst/script/pickrell/getPheno.R	/^goodSet <- goodSet[-grep("_2_argonne",as.character(goodSet$id)),]$/;"	g
+goodSet	inst/script/pickrell/getPheno.R	/^goodSet <- goodSet[order(goodSet$run),]$/;"	g
+goodSet	inst/script/pickrell/getPheno.R	/^goodSet <- read.table("good_set.txt")$/;"	g
+goodSet	inst/script/pickrell/getPheno.R	/^goodSet <- samplesMerged[samplesMerged$readlength == 46 & samplesMerged$sex == 1,]$/;"	g
+gse	inst/script/pickrell/getPheno.R	/^gse <- getGEO("GSE19480")[[1]]$/;"	g
+gseSamples	inst/script/pickrell/getPheno.R	/^gseSamples <- data.frame(id=sub("(.*)","\\\\1",pDataGSE$title),$/;"	g
+h	inst/doc/marginalIndep.R	/^    h <- hist(df$pvalue[qs == levels(qs)[i]], breaks=0:16\/16, plot=FALSE)$/;"	v
+h	inst/doc/sensitivityPrecision.R	/^    geom_point(position = position_jitter(w = 0.1, h = 0), color="grey50", size=1) +$/;"	v
+h	inst/doc/sensitivityPrecision.R	/^  geom_point(position = position_jitter(w = 0.1, h = 0), color="grey50", size=1) +$/;"	v
+h	inst/doc/specificity.R	/^  geom_point(position = position_jitter(w = 0.1, h = 0), color="grey50", size=1) +$/;"	v
+hapmap	inst/script/pickrell/getPheno.R	/^hapmap <- read.csv("HapMap_samples.csv",strings=FALSE)$/;"	g
+hc	inst/doc/rlogHammer.R	/^  hc <- hclust(d)$/;"	v
+hc	inst/doc/sensitivityPrecision.R	/^hc <- hclust(dist(t(nMat),method="binary"))$/;"	g
+hcHeldout	inst/doc/sensitivityPrecision.R	/^hcHeldout <- hclust(average.Jaccard)$/;"	g
+hcTest	inst/doc/sensitivityPrecision.R	/^hcTest <- hclust(average.Jaccard)$/;"	g
+heldMat	inst/doc/sensitivityPrecision.R	/^heldMat <- getHeldoutCalls(.1)$/;"	g
+hghts	inst/doc/posterior.R	/^hghts <- c(4,1.2)$/;"	g
+hjust	inst/doc/sensitivityPrecision.R	/^    theme(axis.text.x = element_text(angle = 45, hjust = 1)) + xlab("") +$/;"	v
+hjust	inst/doc/sensitivityPrecision.R	/^  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + xlab("")$/;"	v
+hjust	inst/doc/simulation.R	/^  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + xlab("mean counts")$/;"	v
+idx	inst/doc/dispShrink.R	/^idx <- c(1:3,5:7)$/;"	g
+idx	inst/doc/sensitivityPrecision.R	/^  idx <- resHeldout[[i]]$DESeq2 < alpha | resHeldout[[i]]$cuffdiff2 < alpha$/;"	v
+idx	inst/doc/sensitivityPrecision.R	/^  idx <- resTest[[i]]$DESeq2 < alpha | resTest[[i]]$cuffdiff2 < alpha$/;"	v
+idx	inst/doc/stableLFC.R	/^  idx <- abs(x) < 10 & abs(y) < 10$/;"	v
+idx	inst/doc/stableLFC.R	/^idx <- c(idx1,idx2)$/;"	g
+idx	inst/script/bottomly/getPheno.R	/^  idx <- c(c57Idx[c57Sub], dbaIdx[dbaSub])$/;"	v
+idx	inst/script/simulateOutliers.R	/^          idx <- resList[[i]][["beta"]] != 0 & resList[[i]][["nonzero"]]$/;"	v
+idx	inst/script/simulateOutliers.R	/^          idx <- resList[[i]][["beta"]] == 0 & resList[[i]][["nonzero"]]$/;"	v
+idx	inst/script/simulateOutliers.R	/^          idx <- resList[[i]][["nonzero"]]$/;"	v
+idx	inst/script/simulateOutliers.R	/^          idx <- resList[[i]][[method]]$padj < p$/;"	v
+idx.j	inst/script/simulateOutliers.R	/^      idx.j <- sample(m, round(n*pOut), TRUE)$/;"	v
+ignore.stdout	inst/script/runScripts.R	/^         ignore.stdout = TRUE, ignore.stderr = TRUE)$/;"	v
+ints	inst/doc/posterior.R	/^ints <- mcols(ddsNoPrior[genes,])$Intercept$/;"	g
+intsPrior	inst/doc/posterior.R	/^intsPrior <- mcols(ddsPrior[genes,])$Intercept + mcols(ddsPrior[genes,])$strainC57BL.6J$/;"	g
+j	inst/doc/sensitivityPrecision.R	/^j <- abind(j0,along=3)$/;"	g
+j0	inst/doc/sensitivityPrecision.R	/^j0 <- lapply(1:nreps, function(i) as.matrix(dist(t(resHeldout[[i]] < alpha),method="binary")))$/;"	g
+j0	inst/doc/sensitivityPrecision.R	/^j0 <- lapply(1:nreps, function(i) as.matrix(dist(t(resTest[[i]] < alpha),method="binary")))$/;"	g
+labelColors	inst/doc/rlogHammer.R	/^  labelColors <- brewer.pal(nlevels(labels), "Paired")$/;"	v
+lfcHeldout	inst/script/bottomly/diffExpr.R	/^    lfcHeldout <- as.data.frame(c(lapply(resHeldout0, function(z) z$beta[resIdx]),$/;"	v
+lfcHeldout	inst/script/bottomly/diffExpr.R	/^lfcHeldout <- lapply(res, "[[", "lfcHeldout")$/;"	g
+lfcTest	inst/script/bottomly/diffExpr.R	/^    lfcTest <- as.data.frame(c(lapply(resTest0, function(z) z$beta[resIdx]),$/;"	v
+lfcTest	inst/script/bottomly/diffExpr.R	/^lfcTest <- lapply(res, "[[", "lfcTest")$/;"	g
+likelihood	inst/doc/posterior.R	/^likelihood <- function(k,alpha,intercept) {$/;"	f
+lognorm	inst/script/simulateCluster.R	/^        lognorm <- t(log2(counts(dds, normalized=TRUE) + 1))$/;"	v
+lognormARI	inst/script/simulateCluster.R	/^        lognormARI <- adjustedRandIndex(condition, cutree(hclust(dist(lognorm)),k=k))$/;"	v
+m	inst/doc/meanDispPairs.R	/^m <- ncol(pickrell)$/;"	g
+m	inst/doc/sensitivityPrecision.R	/^m <- as.matrix(lfcHeldout[[i]])$/;"	g
+m	inst/doc/sensitivityPrecision.R	/^m <- m[!is.na(m[,"DESeq2"]),]$/;"	g
+m	inst/doc/sensitivityPrecision.R	/^m <- m[, -which(colnames(m) == "EBSeq")]$/;"	g
+m	inst/script/simulateOutliers.R	/^               m = rep(m, length(methods) * length(pvalsVector)),$/;"	v
+mLevels	inst/script/simulateDE.R	/^mLevels <- c(6,8,10,20)$/;"	g
+makeColors	inst/doc/cooksDist.R	/^makeColors <- function(y=c(-1e6,1e6)) {$/;"	f
+makeSim	inst/script/makeSim.R	/^makeSim <- function(n, m, x, beta, meanDispPairs, sf=rep(1,m)) {$/;"	f
+makeSimScript	inst/doc/dispImprove.R	/^makeSimScript <- system.file("script\/makeSim.R", package="DESeq2paper", mustWork=TRUE)$/;"	g
+makeSimScript	inst/doc/largeLFCSimulation.R	/^makeSimScript <- system.file("script\/makeSim.R", package="DESeq2paper", mustWork=TRUE)$/;"	g
+makeSimScript	inst/doc/marginalIndep.R	/^makeSimScript <- system.file("script\/makeSim.R", package="DESeq2paper", mustWork=TRUE)$/;"	g
+mat	inst/script/simulateCluster.R	/^        mat <- mat0[,5:20]$/;"	v
+maxCooks	inst/doc/cooksDist.R	/^maxCooks <- apply(assays(dds)[["cooks"]], 1, max)$/;"	g
+meanDispPairs	inst/doc/meanDispPairs.R	/^meanDispPairs <- mcols(ddspickrell)[which(mcols(ddspickrell)$dispGeneEst > 1e-6), c("baseMean", "dispGeneEst")]$/;"	g
+measure.vars	inst/doc/simulation.R	/^measure.vars <- c("sens0to20","sens20to100","sens100to300","sensmore300")$/;"	g
+melted	inst/doc/simulation.R	/^melted <- melt(res[,c(id.vars,measure.vars)], id.vars=id.vars, measure.vars=measure.vars)$/;"	g
+method	inst/script/simulateCluster.R	/^                   method = methods,$/;"	v
+methods	inst/script/simulateCluster.R	/^methods <- c("norm Eucl","log2 Eucl","rlog Eucl","VST Eucl","PoisDist","edgeR BCV")$/;"	g
+methods	inst/script/simulateLFCAccuracy.R	/^methods <- c("DESeq2","GFOLD","edgeR predFC","edgeR predFC10")$/;"	g
+methods	inst/script/simulateOutliers.R	/^methods <- c("DESeq2", "DESeq2-noFilt", "DESeq2-noRepl", "edgeR", "edgeR-robust")$/;"	g
+ms	inst/doc/expVarLogDisp.R	/^ms <- rep(c(6,8,16),c(2,4,4))$/;"	g
+ms	inst/script/simulateDE.R	/^ms <- rep(mLevels, each=nreps * length(effSizeLevels))$/;"	g
+ms	inst/script/simulateLFCAccuracy.R	/^ms <- c(4,6,10,16,20)$/;"	g
+ms	inst/script/simulateOutliers.R	/^ms <- c(10,20)$/;"	g
+mu	inst/script/makeSim.R	/^  mu <- 2^(betafull %*% t(x))$/;"	v
+mu1	inst/doc/posterior.R	/^mu1 <- assays(ddsNoPrior)[["mu"]][genes[1],]$/;"	g
+mu2	inst/doc/posterior.R	/^mu2 <- assays(ddsNoPrior)[["mu"]][genes[2],]$/;"	g
+muMat	inst/script/makeSim.R	/^  muMat <- matrix(rep(mu, times=m) * rep(sf, each=n), ncol=m)$/;"	v
+n	inst/doc/largeLFCSimulation.R	/^n <- 10*round(nrow(pickrell)\/10)$/;"	g
+n	inst/doc/meanDispPairs.R	/^n <- nrow(pickrell)$/;"	g
+nMat	inst/doc/sensitivityPrecision.R	/^nMat <- resHeldout[[i]] < alpha$/;"	g
+nMat	inst/doc/sensitivityPrecision.R	/^nMat <- resTest[[i]] < alpha$/;"	g
+namesAlgos	inst/doc/sensitivityPrecision.R	/^namesAlgos <- make.names(namesAlgos)$/;"	g
+namesAlgos	inst/script/bottomly/diffExpr.R	/^namesAlgos <- names(algos)$/;"	g
+namesAlgos	inst/script/pickrell/diffExpr.R	/^namesAlgos <- names(algos)$/;"	g
+namesAlgos	inst/script/simulateDE.R	/^namesAlgos <- names(algos)$/;"	g
+namesAlgos	inst/script/simulateLFCAccuracy.R	/^namesAlgos <- names(algos)$/;"	g
+namesAlgos	inst/script/simulateOutliers.R	/^namesAlgos <- names(algos)$/;"	g
+nbdata	inst/doc/meanDispPairs.R	/^nbdata <- matrix(rnbinom(n * m, mu=rm, size=1\/asymptDisp), ncol=m)$/;"	g
+nonzero	inst/script/simulateDE.R	/^  nonzero <- rowSums(exprs(e)) > 0$/;"	v
+noplotMDS	inst/script/simulateCluster.R	/^noplotMDS <- plotMDS.DGEList$/;"	g
+norm	inst/script/simulateCluster.R	/^        norm <- t(counts(dds, normalized=TRUE))$/;"	v
+normARI	inst/script/simulateCluster.R	/^        normARI <- adjustedRandIndex(condition, cutree(hclust(dist(norm)),k=k))$/;"	v
+ns	inst/doc/stableLFC.R	/^ns <- c(50,100,200,1000,2000)$/;"	g
+numIdx	inst/script/bottomly/getPheno.R	/^numIdx <- function() {$/;"	f
+numSubsets	inst/script/bottomly/getPheno.R	/^numSubsets <- t(replicate(30, numIdx()))$/;"	g
+nz	inst/script/simulateLFCAccuracy.R	/^        nz <- rowSums(exprs(e)) > 0$/;"	v
+oneminusprec	inst/script/simulateDE.R	/^  oneminusprec <- sapply(resTest, function(z) {$/;"	v
+oneminusprec	inst/script/simulateOutliers.R	/^               oneminusprec = 1 - as.vector(prec),$/;"	v
+oneminusspec	inst/script/simulateOutliers.R	/^               oneminusspec = 1 - as.vector(spec),$/;"	v
+oneminusspecpadj	inst/script/simulateDE.R	/^  oneminusspecpadj <- sapply(resTest, function(z) mean((z$padj < .1)[beta == 0 & nonzero], na.rm=TRUE))$/;"	v
+oneminusspecpvals	inst/script/simulateDE.R	/^  oneminusspecpvals <- sapply(resTest, function(z) mean((z$pvals < .01)[beta == 0 & nonzero], na.rm=TRUE))$/;"	v
+out	inst/doc/cooksDist.R	/^out <- assays(dds)[["cooks"]][idx,] > qf(.99, 2, ncol(dds) - 2)$/;"	g
+out	inst/script/runScripts.R	/^    out <- cbind(1:n, rep(0,n), exprs(e)[,i], rep(0,n), rep(0,n))$/;"	v
+out	inst/script/runScripts.R	/^  out <- capture.output({$/;"	v
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(d, aes(x=evaluation,y=precision,color=evaluation))$/;"	g
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(d, aes(x=evaluation,y=sensitivity,color=evaluation))$/;"	g
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(d, aes(x=reorder(algorithm,heldoutCalls,median),y=heldoutCalls,color=algorithm))$/;"	g
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(d, aes(x=reorder(algorithm,testCalls,median),y=testCalls,color=algorithm))$/;"	g
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(fdrAtAlphaPlot[fdrAtAlphaPlot$callsTest > 0,], aes(x=alpha, y=FDR, color=algorithm))$/;"	g
+p	inst/doc/sensitivityPrecision.R	/^p <- ggplot(sensAtTarget, aes(x=algorithm, y=sensitivity, color=algorithm))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(data=res, aes(x=m, y=MAE, color=method, shape=method))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(data=res, aes(x=m, y=RMSE, color=method, shape=method))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(data=res[grepl("spike",res$type),], aes(x=m, y=DiffMAE, color=method, shape=method))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(data=res[grepl("spike",res$type),], aes(x=m, y=DiffRMSE, color=method, shape=method))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(melted, aes(y=sensitivity, x=aveexp, group=algorithm, color=algorithm, shape=algorithm))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(res, aes(x=oneminusspec, y=sensitivity, color=algorithm))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(res, aes(x=precpadj, y=oneminusprec, color=algorithm))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(res, aes(x=rnormsd, y=ARI, color=method, shape=method))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(res, aes(y=sensitivity, x=oneminusprec, color=algorithm, shape=algorithm))$/;"	g
+p	inst/doc/simulation.R	/^p <- ggplot(resMinusEBSeq, aes(y=sensitivity, x=oneminusspecpvals, color=algorithm, shape=algorithm))$/;"	g
+p	inst/doc/specificity.R	/^p <- ggplot(d, aes(x=reorder(algorithm, fpr, median), y=fpr, color=algorithm))$/;"	g
+pDataGSE	inst/script/pickrell/getPheno.R	/^pDataGSE <- pData(gse)[,c("title","supplementary_file_1")]$/;"	g
+padj	inst/doc/lfcThreshold.R	/^padj <- res$padj$/;"	g
+padj	inst/script/runScripts.R	/^       padj = res$"E-FDR",$/;"	v
+padj	inst/script/runScripts.R	/^    padj <- p.adjust(pvals,method="BH")$/;"	v
+padj	inst/script/runScripts.R	/^    padj <- res$padj$/;"	v
+padj	inst/script/runScripts.R	/^  padj <- p.adjust(pvals,method="BH")$/;"	v
+padj	inst/script/runScripts.R	/^  padj <- res$padj$/;"	v
+padjAB	inst/doc/lfcThreshold.R	/^padjAB <- resNoPrior$padj$/;"	g
+padjMat	inst/script/simulateOutliers.R	/^      padjMat <- sapply(seq_along(resList), function(i) {$/;"	v
+percentOutlier	inst/script/simulateOutliers.R	/^               percentOutlier = rep(pOut, length(methods) * length(pvalsVector)))$/;"	v
+pickone	inst/doc/dispShrink.R	/^  pickone <- function(x) {$/;"	f
+pickrell.sub	inst/doc/largeLFCSimulation.R	/^pickrell.sub <- DESeqDataSet(pickrell[,seq_len(m)], ~ 1)$/;"	g
+pickrell.sub	inst/doc/largeLFCSimulation.R	/^pickrell.sub <- estimateSizeFactors(pickrell.sub)$/;"	g
+plotDispShrink	inst/doc/dispShrink.R	/^plotDispShrink <- function(dds) {$/;"	f
+plotHclustColors	inst/doc/rlogHammer.R	/^plotHclustColors <- function(matrix,labels,hang=.1,...) {$/;"	f
+plotMM	inst/doc/stableLFC.R	/^plotMM <- function(x,y,s,l=4,...) {$/;"	f
+plotMarginalPvalueDensity	inst/doc/marginalIndep.R	/^plotMarginalPvalueDensity <- function(df, cuts) {$/;"	f
+plt.flat1	inst/doc/largeLFCSimulation.R	/^plt.flat1 <- ggplot(d, aes(log10mu, beta)) + geom_point() + $/;"	g
+plt.flat2	inst/doc/largeLFCSimulation.R	/^plt.flat2 <- simpleMA(mat)$/;"	g
+plt.null1	inst/doc/largeLFCSimulation.R	/^plt.null1 <- ggplot(d, aes(log10mu, beta)) + geom_point() + $/;"	g
+plt.null2	inst/doc/largeLFCSimulation.R	/^plt.null2 <- simpleMA(mat)$/;"	g
+plt.real	inst/doc/largeLFCSimulation.R	/^plt.real <- simpleMA(K)$/;"	g
+poiDist	inst/script/simulateCluster.R	/^        poiDist <- PoissonDistance(t(mat))$dd$/;"	v
+poiDistARI	inst/script/simulateCluster.R	/^        poiDistARI <- adjustedRandIndex(condition, cutree(hclust(poiDist),k=k))$/;"	v
+points2	inst/doc/posterior.R	/^points2 <- function(x,y,col="black",lty) {$/;"	f
+posterior	inst/doc/posterior.R	/^posterior <- function(k,alpha,intercept) {$/;"	f
+prec	inst/script/simulateOutliers.R	/^    prec <- sapply(methods, function(method) {$/;"	v
+precMat	inst/script/simulateOutliers.R	/^      precMat <- sapply(seq_along(resList), function(i) {$/;"	v
+precMelt	inst/doc/sensitivityPrecision.R	/^precMelt <- melt(precMat, id="heldout")$/;"	g
+precpadj	inst/script/simulateOutliers.R	/^               precpadj = rep(padjVector, times=length(methods)),$/;"	v
+predbeta	inst/script/runScripts.R	/^  predbeta <- predFC(exprs(e), design, offset=getOffset(dgel), dispersion=dgel$tagwise.dispersion)$/;"	v
+predbeta	inst/script/simulateLFCAccuracy.R	/^          predbeta <- res0[["edgeR"]]$predbeta$/;"	v
+predbeta	inst/script/simulateLFCAccuracy.R	/^          predbeta <- res0[["edgeR"]]$predbeta10$/;"	v
+predbeta	inst/script/simulateLFCAccuracy.R	/^          predbeta <- res0[[method]]$beta$/;"	v
+predbeta10	inst/script/runScripts.R	/^  predbeta10 <- predFC(exprs(e), design, prior.count=10, offset=getOffset(dgel), dispersion=dgel$tagwise.dispersion)$/;"	v
+printIdx	inst/script/bottomly/getPheno.R	/^printIdx <- function() {$/;"	f
+priorSigma	inst/doc/posterior.R	/^priorSigma <- sqrt(betaPriorVar[2]) * sqrt(2)$/;"	g
+ps	inst/doc/expVarLogDisp.R	/^ps <- rep(c(2,3,2,3),c(4,2,2,2))$/;"	g
+pvals	inst/script/runScripts.R	/^    pvals <- res$pvalue$/;"	v
+pvals	inst/script/runScripts.R	/^  pvals <- edger.lrt$table$PValue$/;"	v
+pvals	inst/script/runScripts.R	/^  pvals <- res$pvalue$/;"	v
+pvals	inst/script/runScripts.R	/^  pvals <- result$pval$/;"	v
+pvals	inst/script/runScripts.R	/^  pvals <- samr.pvalues.from.perms(samfit$samr.obj$tt, samfit$samr.obj$ttstar)$/;"	v
+pvals	inst/script/runScripts.R	/^  pvals <- tt$P.Value $/;"	v
+pvals	inst/script/simulateOutliers.R	/^               pvals = rep(pvalsVector, times=length(methods)),$/;"	v
+q0	inst/doc/cooksDist.R	/^q0 <- 2^(mcols(dds)$Intercept[idx] + mcols(dds)$strainC57BL.6J[idx])$/;"	g
+q0	inst/doc/cooksDist.R	/^q0 <- 2^(mcols(ddsNoReplace)$Intercept[idx] + mcols(ddsNoReplace)$strainC57BL.6J[idx])$/;"	g
+q1	inst/doc/cooksDist.R	/^q1 <- 2^(mcols(dds)$Intercept[idx] + mcols(dds)$strainDBA.2J[idx])$/;"	g
+q1	inst/doc/cooksDist.R	/^q1 <- 2^(mcols(ddsNoReplace)$Intercept[idx] + mcols(ddsNoReplace)$strainDBA.2J[idx])$/;"	g
+randomSubsets	inst/script/bottomly/diffExpr.R	/^randomSubsets <- read.table("random_subsets.txt",strings=FALSE)$/;"	g
+randomSubsets	inst/script/bottomly/getPheno.R	/^randomSubsets <- t(replicate(30, printIdx()))$/;"	g
+randomSubsets	inst/script/pickrell/diffExpr.R	/^randomSubsets <- read.table("random_subsets.txt",strings=FALSE)$/;"	g
+randomSubsets	inst/script/pickrell/getPheno.R	/^randomSubsets <- t(replicate(30,goodSet$run[sample(nrow(goodSet),10,replace=FALSE)]))$/;"	g
+readlength	inst/script/pickrell/getPheno.R	/^readlength <- read.csv("readlength.txt",header=FALSE)$/;"	g
+renameAtoB	inst/doc/sensitivityPrecision.R	/^renameAtoB <- function(f,a,b) {$/;"	f
+renameAtoB	inst/doc/specificity.R	/^renameAtoB <- function(f,a,b) {$/;"	f
+res	inst/doc/lfcThreshold.R	/^res <- results(dds,lfcThreshold=theta,altHypothesis="greaterAbs")$/;"	g
+res	inst/doc/sensitivityPrecision.R	/^    res <- getPrecisionAlgoGold(.1,.1,algo)$/;"	v
+res	inst/doc/sensitivityPrecision.R	/^    res <- getSensitivityAlgoGold(.1,.1,algo)$/;"	v
+res	inst/doc/simulation.R	/^res <- res[!(res$algorithm == "DESeq2-noFilt" & res$m >= 14),]$/;"	g
+res	inst/doc/simulation.R	/^res <- res[!(res$algorithm == "DESeq2-noRepl" & res$m < 14),]$/;"	g
+res	inst/doc/simulation.R	/^res <- res[!(res$m == 6 & res$algorithm == "SAMseq"),]$/;"	g
+res	inst/doc/simulation.R	/^res <- res[res$dispScale == 1,]$/;"	g
+res	inst/script/bottomly/diffExpr.R	/^res <- bplapply(1:nreps, function(i) {   $/;"	g
+res	inst/script/runScripts.R	/^      res <- EBTest(Data = exprs(e),$/;"	v
+res	inst/script/runScripts.R	/^  res <- read.table(out.fl)$/;"	v
+res	inst/script/runScripts.R	/^  res <- results(dds)$/;"	v
+res0	inst/script/simulateLFCAccuracy.R	/^      res0 <- lapply(algos, function(f) f(e))$/;"	v
+res1	inst/doc/marginalIndep.R	/^res1 <- results(dds1, independentFiltering=FALSE)$/;"	g
+res2	inst/doc/marginalIndep.R	/^res2 <- results(dds2, independentFiltering=FALSE)$/;"	g
+resDefault	inst/script/runScripts.R	/^  resDefault <- results(ddsDefault)$/;"	v
+resHeldout	inst/script/bottomly/diffExpr.R	/^    resHeldout <- as.data.frame(c(lapply(resHeldout0, function(z) z$padj[resIdx]),$/;"	v
+resHeldout	inst/script/bottomly/diffExpr.R	/^resHeldout <- lapply(res, "[[", "resHeldout")$/;"	g
+resList	inst/script/pickrell/diffExpr.R	/^resList <- bplapply(1:nreps, function(i) {$/;"	g
+resList	inst/script/runScripts.R	/^  resList <- list("DESeq2"=resDefault, "DESeq2-noFilt"=resNoFilt, "DESeq2-noRepl"=resNoRepl)$/;"	v
+resList	inst/script/simulateDE.R	/^resList <- bplapply(seq_along(ms), function(i) {$/;"	g
+resList	inst/script/simulateOutliers.R	/^    resList <- lapply(seq_len(nreps), function(i) {$/;"	v
+resMat	inst/doc/specificity.R	/^resMat <- t(sapply(resList, function(z) colMeans(z < alpha, na.rm=TRUE)))$/;"	g
+resMinusEBSeq	inst/doc/simulation.R	/^resMinusEBSeq <- res[res$algorithm != "EBSeq",] # EBSeq does not produce p-values$/;"	g
+resNoFilt	inst/script/runScripts.R	/^  resNoFilt <- results(ddsDefault, cooksCutoff=FALSE)$/;"	v
+resNoPrior	inst/doc/lfcThreshold.R	/^resNoPrior <- results(ddsNoPrior,lfcThreshold=theta,altHypothesis="lessAbs")$/;"	g
+resNoPrior	inst/doc/posterior.R	/^resNoPrior <- results(ddsNoPrior,cooksCutoff=FALSE)$/;"	g
+resNoRepl	inst/script/runScripts.R	/^  resNoRepl <- results(ddsNoRepl)$/;"	v
+resOut	inst/script/runScripts.R	/^  resOut <- lapply(resList, function(res) {$/;"	v
+resPrior	inst/doc/posterior.R	/^resPrior <- results(ddsPrior,cooksCutoff=FALSE)$/;"	g
+resSensPadj	inst/doc/simulation.R	/^resSensPadj <- resSensPadj[!duplicated(with(resSensPadj, paste(algorithm, m, percentOutlier))),]$/;"	g
+resSensPadj	inst/doc/simulation.R	/^resSensPadj <- resSensPadj[nrow(resSensPadj):1,]$/;"	g
+resSensPadj	inst/doc/simulation.R	/^resSensPadj <- res[res$senspadj < .1,]$/;"	g
+resTest	inst/script/bottomly/diffExpr.R	/^    resTest <- as.data.frame(c(lapply(resTest0, function(z) z$padj[resIdx]),$/;"	v
+resTest	inst/script/bottomly/diffExpr.R	/^resTest <- lapply(res, "[[", "resTest")$/;"	g
+resTest	inst/script/pickrell/diffExpr.R	/^  resTest <- as.data.frame(c(lapply(resTest0, function(z) z$pvals[match(common,rownames(eset))]),$/;"	v
+resTest	inst/script/simulateDE.R	/^  resTest <- lapply(algos, function(f) f(e))$/;"	v
+resTest0	inst/script/simulateOutliers.R	/^      resTest0 <- lapply(algos, function(f) f(e))$/;"	v
+resp.type	inst/script/runScripts.R	/^  capture.output({samfit <- SAMseq(x, y, resp.type = "Two class unpaired")})$/;"	v
+result	inst/script/runScripts.R	/^  result <- result[match(rownames(seqData),rownames(result)),]$/;"	v
+result	inst/script/runScripts.R	/^  result <- waldTest(seqData, "B", "A")$/;"	v
+rld	inst/script/simulateCluster.R	/^        rld <- t(assay(rlog(dds, blind=FALSE)))$/;"	v
+rlogARI	inst/script/simulateCluster.R	/^        rlogARI <- adjustedRandIndex(condition, cutree(hclust(dist(rld)),k=k))$/;"	v
+rlogm	inst/doc/rlogHammer.R	/^rlogm <- assay(rld)$/;"	g
+rm	inst/doc/meanDispPairs.R	/^rm <- rowMeans(counts(ddspickrell, normalized=TRUE))$/;"	g
+rmseNoPriorNoPrior	inst/doc/stableLFC.R	/^rmseNoPriorNoPrior <- sqrt(mean((results(ddsListNoPrior[[1]])$log2FoldChange - $/;"	g
+rmseNoPriorPC	inst/doc/stableLFC.R	/^rmseNoPriorPC <- sqrt(mean((results(ddsListNoPrior[[1]])$log2FoldChange - $/;"	g
+rmseNoPriorPrior	inst/doc/stableLFC.R	/^rmseNoPriorPrior <- sqrt(mean((results(ddsListNoPrior[[1]])$log2FoldChange - $/;"	g
+rmsePriorPrior	inst/doc/stableLFC.R	/^rmsePriorPrior <- sqrt(mean((results(ddsList[[1]])$log2FoldChange - $/;"	g
+rmselg	inst/doc/stableLFC.R	/^rmselg <- function(rmse) {$/;"	f
+rnormsds	inst/script/simulateCluster.R	/^rnormsds <- list(seq(from=0, to=.6, length=7),$/;"	g
+runDESeq	inst/script/runScripts.R	/^runDESeq <- function(e) {$/;"	f
+runDESeq2	inst/script/runScripts.R	/^runDESeq2 <- function(e, retDDS=FALSE) {$/;"	f
+runDESeq2Outliers	inst/script/runScripts.R	/^runDESeq2Outliers <- function(e, retDDS=FALSE) {$/;"	f
+runDSS	inst/script/runScripts.R	/^runDSS <- function(e) {$/;"	f
+runEBSeq	inst/script/runScripts.R	/^runEBSeq <- function(e) {$/;"	f
+runEdgeR	inst/script/runScripts.R	/^runEdgeR <- function(e) {$/;"	f
+runEdgeRRobust	inst/script/runScripts.R	/^runEdgeRRobust <- function(e) {$/;"	f
+runGFOLD	inst/script/runScripts.R	/^runGFOLD <- function(e) {$/;"	f
+runSAMseq	inst/script/runScripts.R	/^runSAMseq <- function(e) {$/;"	f
+runVoom	inst/script/runScripts.R	/^runVoom <- function(e) {$/;"	f
+s	inst/doc/dispShrink.R	/^  s <- c(up, down, outliers)$/;"	v
+s	inst/doc/dispShrink.R	/^  s <- s[!is.na(s)]$/;"	v
+sample.fls	inst/script/runScripts.R	/^  sample.fls <- replicate(m, tempfile(pattern = "sample",$/;"	v
+samples	inst/script/bottomly/getPheno.R	/^samples <- read.table("bottomly_phenodata.txt",header=TRUE)$/;"	g
+samples	inst/script/pickrell/getPheno.R	/^samples <- merge(gseSamples,hapmap,by="hapmap_id")$/;"	g
+samples	inst/script/pickrell/getPheno.R	/^samples <- read.table("geo_samples.txt")$/;"	g
+samples1	inst/script/runScripts.R	/^  samples1 <- paste(sample.fls[pData(e)$condition == "A"], collapse=",")$/;"	v
+samples2	inst/script/runScripts.R	/^  samples2 <- paste(sample.fls[pData(e)$condition == "B"], collapse=",")$/;"	v
+samplesMerged	inst/script/bottomly/getPheno.R	/^samplesMerged <- merge(samples, conversion)$/;"	g
+samplesMerged	inst/script/bottomly/getPheno.R	/^samplesMerged <- samplesMerged[order(samplesMerged$strain),]$/;"	g
+samplesMerged	inst/script/pickrell/getPheno.R	/^samplesMerged <- merge(merge(samples, conversion),readlength)$/;"	g
+samplevar	inst/doc/expVarLogDisp.R	/^  samplevar <- var(log(disp[disp > 1e-7]))$/;"	v
+se	inst/script/bottomly/diffExpr.R	/^se <- bottomly[,match(randomSubsets[1,],colnames(bottomly))]$/;"	g
+se	inst/script/pickrell/diffExpr.R	/^se <- pickrell$/;"	g
+sens	inst/doc/sensitivityPrecision.R	/^    sens <- sapply(1:nreps, function(i) {$/;"	v
+sens	inst/script/simulateDE.R	/^  sens <- sapply(resTest, function(z) mean((z$padj < .1)[sensidx]))$/;"	v
+sens	inst/script/simulateOutliers.R	/^    sens <- sapply(methods, function(method) {$/;"	v
+sensMat	inst/script/simulateOutliers.R	/^      sensMat <- sapply(seq_along(resList), function(i) {$/;"	v
+sensStratified	inst/script/simulateDE.R	/^  sensStratified <- t(sapply(resTest, function(z) tapply( (z$padj < .1)[sensidx], rmf[sensidx], mean)))$/;"	v
+sensidx	inst/script/simulateDE.R	/^  sensidx <- abs(beta) > 0 & nonzero$/;"	v
+senspadj	inst/script/simulateOutliers.R	/^               senspadj = as.vector(senspadj),$/;"	v
+senspadj	inst/script/simulateOutliers.R	/^    senspadj <- sapply(methods, function(method) {$/;"	v
+seqData	inst/script/runScripts.R	/^  seqData <- estDispersion(seqData)$/;"	v
+seqData	inst/script/runScripts.R	/^  seqData <- estNormFactors(seqData)$/;"	v
+seqData	inst/script/runScripts.R	/^  seqData <- newSeqCountSet(X, designs)$/;"	v
+sf	inst/doc/posterior.R	/^sf <- sizeFactors(ddsNoPrior)$/;"	g
+sf	inst/script/simulateCluster.R	/^      sf <- sfs[[sf.idx]]$/;"	v
+sfs	inst/script/simulateCluster.R	/^sfs <- list(equal=rep(1,m), unequal=rep(c(1,1,1\/3,3), times=(k+1)))$/;"	g
+sigHeldout	inst/doc/sensitivityPrecision.R	/^      sigHeldout <- resHeldout[[i]][[algoOut]] < alphaOut  $/;"	v
+sigHeldout	inst/doc/sensitivityPrecision.R	/^      sigHeldout <- resHeldout[[i]][[algoOut]] < alphaOut$/;"	v
+sigHeldout	inst/doc/sensitivityPrecision.R	/^    sigHeldout <- resHeldout[[i]][[gold]] < alphaOut$/;"	v
+sigTest	inst/doc/sensitivityPrecision.R	/^      sigTest <- resTest[[i]][[algo]] < alpha$/;"	v
+sigTest	inst/doc/sensitivityPrecision.R	/^    sigTest <- resTest[[i]][[algo]] < alpha$/;"	v
+sigTestList	inst/doc/sensitivityPrecision.R	/^  sigTestList <- lapply(1:nreps, function(i) lapply(alphas, function(alpha) which(resTest[[i]][[algo]] < alpha)))$/;"	v
+simpleMA	inst/doc/largeLFCSimulation.R	/^simpleMA <- function(K) {$/;"	f
+sizeFactor	inst/script/simulateCluster.R	/^                   sizeFactor = rep(names(sfs)[sf.idx], length(methods)))$/;"	v
+sizes	inst/script/runScripts.R	/^  sizes <- MedianNorm(exprs(e))$/;"	v
+smallp	inst/script/simulateOutliers.R	/^          smallp <- resList[[i]][[method]]$pvals[idx] < p$/;"	v
+spec	inst/script/simulateOutliers.R	/^    spec <- sapply(methods, function(method) {$/;"	v
+specMat	inst/script/simulateOutliers.R	/^      specMat <- sapply(seq_along(resList), function(i) {$/;"	v
+sqlfile	inst/script/bottomly/getPheno.R	/^sqlfile <- getSRAdbFile()$/;"	g
+sqlfile	inst/script/pickrell/getPheno.R	/^sqlfile <- getSRAdbFile()$/;"	g
+sra_con	inst/script/bottomly/getPheno.R	/^                         sra_con = sra_con)$/;"	v
+sra_con	inst/script/bottomly/getPheno.R	/^sra_con <- dbConnect(SQLite(),sqlfile)$/;"	g
+sra_con	inst/script/pickrell/getPheno.R	/^                         sra_con = sra_con)$/;"	v
+sra_con	inst/script/pickrell/getPheno.R	/^sra_con <- dbConnect(SQLite(),sqlfile)$/;"	g
+testMat	inst/doc/sensitivityPrecision.R	/^testMat <- getTestCalls(.1)$/;"	g
+theorvar	inst/doc/expVarLogDisp.R	/^  theorvar <- trigamma((m-p)\/2)$/;"	v
+tmpdir	inst/script/runScripts.R	/^                                      tmpdir = gfold.samples.dir, fileext = ""))$/;"	v
+top1	inst/doc/stableLFC.R	/^  top1 <- head(order(-abs(results(l[[1]])$log2FoldChange)),n)$/;"	v
+top2	inst/doc/stableLFC.R	/^  top2 <- head(order(-abs(results(l[[2]])$log2FoldChange)),n)$/;"	v
+trimit	inst/doc/simulation.R	/^trimit <- function(x) x[x > -4 & x < 4] # for visualization only$/;"	f
+tt	inst/script/runScripts.R	/^  tt <- topTable(fit,coef=ncol(design),n=nrow(dgel),sort.by="none")$/;"	v
+types	inst/script/simulateLFCAccuracy.R	/^types <- c("bell","slab bell","slab spike","spike spike")$/;"	g
+up	inst/doc/dispShrink.R	/^  up <- sapply(seq_along(bins[-1]), function(i) pickone(mcols(dds)$dispGeneEst > 1e-4 & !mcols(dds)$dispOutlier & mcols(dds)$dispGeneEst > mcols(dds)$dispFit & mcols(dds)$baseMean > bins[i] & mcols(dds)$baseMean < bins[i+1]))$/;"	v
+v	inst/script/runScripts.R	/^  v <- voom(dgel,design,plot=FALSE)$/;"	v
+vsd	inst/script/simulateCluster.R	/^        vsd <- t(assay(varianceStabilizingTransformation(dds, blind=FALSE)))$/;"	v
+vstARI	inst/script/simulateCluster.R	/^        vstARI <- adjustedRandIndex(condition, cutree(hclust(dist(vsd)),k=k))$/;"	v
+wrongSign	inst/doc/sensitivityPrecision.R	/^wrongSign <- sapply(1:nreps, function(i) {$/;"	g
+x	inst/doc/dispImprove.R	/^x <- model.matrix(~ condition)$/;"	g
+x	inst/doc/largeLFCSimulation.R	/^x <- model.matrix(~ condition)$/;"	g
+x	inst/doc/marginalIndep.R	/^x <- model.matrix(~ condition)$/;"	g
+x	inst/script/runScripts.R	/^  x <- exprs(e)$/;"	v
+x	inst/script/simulateCluster.R	/^x <- model.matrix(~ condition0)$/;"	g
+x	inst/script/simulateDE.R	/^  x <- model.matrix(~ condition)$/;"	v
+x	inst/script/simulateLFCAccuracy.R	/^      x <- model.matrix(~ condition)$/;"	v
+x	inst/script/simulateOutliers.R	/^      x <- model.matrix(~ condition)$/;"	v
+xlab	inst/doc/largeLFCSimulation.R	/^xlab <- "true log10 base mean"$/;"	g
+xs	inst/doc/dispShrink.R	/^  xs <- 10^(-20:50\/10)$/;"	v
+y	inst/doc/sensitivityPrecision.R	/^y <- sweep(nMat,2,2^(ncol(nMat)-order(hc$order)),"*")$/;"	g
+y	inst/script/runScripts.R	/^  y <- pData(e)$condition$/;"	v
+ylab	inst/doc/largeLFCSimulation.R	/^ylab <- "true log2 fold change"$/;"	g
+z	inst/doc/posterior.R	/^  z <- sapply(betas,function(b) {$/;"	v
+z	inst/doc/sensitivityPrecision.R	/^z <- nMat[order(-rowSums(y)),]$/;"	g
