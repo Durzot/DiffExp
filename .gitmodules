@@ -1,3 +1,9 @@
 [submodule "tools/edgeR"]
 	path = tools/edgeR
 	url = https://git.bioconductor.org/packages/edgeR
+[submodule "tools/DESeq2"]
+	path = tools/DESeq2
+	url = https://git.bioconductor.org/packages/DESeq2
+[submodule "tools/limma"]
+	path = tools/limma
+	url = https://git.bioconductor.org/packages/limma
