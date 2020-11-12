@@ -1,8 +1,25 @@
 library("GenomicRanges")
 library("Biobase")
 library("BiocParallel")
-load("../../../data/bottomly_sumexp.RData")
+library("SummarizedExperiment")
+
+# reform the data as the bottomly_sumexp.RData object downloaded
+# from v1.3 is from an old version of GenomicRanges packages that 
+# has since introduced changes to its classes.
+# old code:
+# load("../../../data/bottomly_sumexp_new.RData")
+# new code
+# load("../../../data/bottomly_sumexp.RData")
+# bottomly <- SummarizedExperiment(
+#     assays= SimpleList(counts=attr(bottomly, "assays")$data$counts),
+#     colData = colData(bottomly),
+#     metadata = attr(bottomly, "exptData"),
+#     rowRanges = attr(bottomly,"rowData")
+# )
+# save(bottomly, file="../../../data/bottomly_sumexp_new.RData")
+load("../../../data/bottomly_sumexp_new.RData")
 randomSubsets <- read.table("random_subsets.txt",strings=FALSE)
+
 se <- bottomly[,match(randomSubsets[1,],colnames(bottomly))]
 colData(se)$run <- colnames(se)
 eset <- ExpressionSet(assay(se),
