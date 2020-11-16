@@ -26,3 +26,8 @@ For now, the following methods have been studied:
     - Used it on a project.
     - Skimmed through the vignette
       <https://ucdavis-bioinformatics-training.github.io/2018-June-RNA-Seq-Workshop/thursday/DE.html>
+
+
+## The `DiffExp` package.
+
+The package is under development. Details about functions may be found in the manual package in the root folder.
