@@ -1,15 +1,15 @@
-# @modified: 12 Nov 2020
+# @modified: 16 Nov 2020
 # @created: 06 Nov 2020
 # @author: Yoann Pradat
 #
 # One function for loading the data to the object expected in each differential analysis procedure.
 
-#' Transform \code{SummarizedExperiment} object to \code{\link[DESeq2]{DESeq2DataSet}} object.
+#' Transform \code{SummarizedExperiment} object to \code{DESeqDataSet} object.
 #'
-#' @return a \code{DESeq2DataSet} object
+#' @return a \code{DESeqDataSet} object
 #' @param object a \code{SummarizedExperiment} object
 #' @param design a formula or matrix that expresses how the counts for each variable depend on the variables in
-#' \code{colData}. See \code{\link[DESeq2]{DESeqDataSet}}.
+#' \code{colData}. See \code{DESeqDataSet}.
 #'
 #' @import SummarizedExperiment
 #' @importFrom DESeq2 DESeqDataSetFromMatrix
@@ -17,7 +17,7 @@
 #'
 #' @author Yoann Pradat
 #'
-#' @export
+#' @keywords internal
 load_to_deseq2 <- function(object, design=NULL){
   # counts
   count_data <- as.matrix(assays(object)$counts)
@@ -35,14 +35,14 @@ load_to_deseq2 <- function(object, design=NULL){
   return(dds)
 }
 
-#' Transform \code{SummarizedExperiment} object to \code{\link[edgeR]{DGEList}} object.
+#' Transform \code{SummarizedExperiment} object to \code{DGEList} object.
 #'
 #' @param object a \code{SummarizedExperiment} object
 #'
 #' @importFrom edgeR cpm
 #' @author Yoann Pradat
 #'
-#' @export
+#' @keywords internal
 load_to_edgeR <- function(object){
   return(T)
 }
@@ -53,7 +53,7 @@ load_to_edgeR <- function(object){
 #'
 #' @author Yoann Pradat
 #'
-#' @export
+#' @keywords internal
 load_to_limma <- function(object){
   return(T)
 }
