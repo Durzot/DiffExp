@@ -2,16 +2,20 @@
 % Please edit documentation in R/load.R
 \name{load_to_edgeR}
 \alias{load_to_edgeR}
-\title{Transform \code{SummarizedExperiment} object to \code{\link[edgeR]{DGEList}} object.}
+\title{Transform \code{SummarizedExperiment} object to \code{DGEList} object.}
 \usage{
-load_to_edgeR(object)
+load_to_edgeR(object, design)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
+
+\item{design}{a formula that expresses how the counts for each variable depend on the variables in
+\code{colData}}
 }
 \description{
-Transform \code{SummarizedExperiment} object to \code{\link[edgeR]{DGEList}} object.
+Transform \code{SummarizedExperiment} object to \code{DGEList} object.
 }
 \author{
 Yoann Pradat
 }
+\keyword{internal}

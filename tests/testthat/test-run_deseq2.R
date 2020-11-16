@@ -4,7 +4,8 @@ test_that("run_deseq2 works", {
   for (design_name in names(designs_run)){
     design <- designs_run[[design_name]]
     contrasts <- contrasts_run[[design_name]]
-    table_deseq2 <- run_deseq2(object, 
+    object_prepro <- preprocess_object(object, min_count=0, min_total_count=15, norm_factors_method="TMM")
+    table_deseq2 <- run_deseq2(object_prepro, 
                                design=design,
                                contrasts=contrasts,
                                opts_algo=opts_diffexp$deseq2,

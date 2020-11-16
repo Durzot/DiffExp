@@ -15,3 +15,4 @@ Transform \code{SummarizedExperiment} object to ????
 \author{
 Yoann Pradat
 }
+\keyword{internal}

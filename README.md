@@ -11,11 +11,17 @@ For now, the following methods have been studied:
     - Read the paper <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8>
     - Read the code in details
     - Used it on a project.
-    - Skimmed through the vignette
+    - Skim through the vignette
       <https://www.bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html>
     2. **TODO**
     - Understand the usage of cook's distances, the filter threshold selection for independent filtering and
       the refitting at the end of `estimateDispersionGeneEst` and some other refittings.
+
+- `edgeR`
+    1. **Done**
+    - Read the short paper <https://doi.org/10.1093/bioinformatics/btp616>
+    - Read the extended paper <https://doi.org/10.1093/nar/gks042>
+    - Skim through the user guide.
 
 - `limmaVoom`
     1. **Done**

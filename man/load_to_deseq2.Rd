@@ -2,22 +2,23 @@
 % Please edit documentation in R/load.R
 \name{load_to_deseq2}
 \alias{load_to_deseq2}
-\title{Transform \code{SummarizedExperiment} object to \code{\link[DESeq2]{DESeq2DataSet}} object.}
+\title{Transform \code{SummarizedExperiment} object to \code{DESeqDataSet} object.}
 \usage{
 load_to_deseq2(object, design = NULL)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
 
-\item{design}{a formula or matrix that expresses how the counts for each variable depend on the variables in
-\code{colData}. See \code{\link[DESeq2]{DESeqDataSet}}.}
+\item{design}{a formula that expresses how the counts for each variable depend on the variables in
+\code{colData}}
 }
 \value{
-a \code{DESeq2DataSet} object
+a \code{DESeqDataSet} object
 }
 \description{
-Transform \code{SummarizedExperiment} object to \code{\link[DESeq2]{DESeq2DataSet}} object.
+Transform \code{SummarizedExperiment} object to \code{DESeqDataSet} object.
 }
 \author{
 Yoann Pradat
 }
+\keyword{internal}
