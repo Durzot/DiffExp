@@ -1,14 +1,15 @@
 # Project specific
 tools/DESeq2paper/data
 
-
 # Tex build
 docs/**/build/**/*.*
 !docs/**/build/**/*.pdf
 
-
 # Specs
 .tool-versions
+
+# Tags
+tags*
 
 # Logs 
 log/

@@ -6,12 +6,15 @@
 
 #' Transform \code{SummarizedExperiment} object to \code{\link[DESeq2]{DESeq2DataSet}} object.
 #'
+#' @return a \code{DESeq2DataSet} object
 #' @param object a \code{SummarizedExperiment} object
 #' @param design a formula or matrix that expresses how the counts for each variable depend on the variables in
 #' \code{colData}. See \code{\link[DESeq2]{DESeqDataSet}}.
 #'
 #' @import SummarizedExperiment
 #' @importFrom DESeq2 DESeqDataSetFromMatrix
+#' @importFrom S4Vectors metadata
+#'
 #' @author Yoann Pradat
 #'
 #' @export
@@ -20,13 +23,11 @@ load_to_deseq2 <- function(object, design=NULL){
   count_data <- as.matrix(assays(object)$counts)
   mode(count_data) <- "integer"
 
-  # colData
-  col_data <- colData(object)
-
   # make the DESeq2 object
-  dds <- DESeqDataSetFromMatrix(countData = count_data,
-                                colData = col_data,
-                                design =  design)
+  dds <- DESeqDataSetFromMatrix(countData=count_data,
+                                colData=colData(object),
+                                design=design,
+                                metadata=metadata(object))
 
   # add row data
   mcols(dds) <- cbind(mcols(dds), rowData(object))

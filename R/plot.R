@@ -23,13 +23,15 @@ plot_dispersion_deseq2 <- function(dds, filepath, title, subtitle=NULL){
   ymin <- 1e-2
   ymax <- max(10, ncol(dds))
   DESeq2::plotDispEsts(object = dds,
-               ylim = c(ymin, ymax),
-               ymin = ymin,
-               cex = 0.2)
+                       ylim = c(ymin, ymax),
+                       ymin = ymin,
+                       cex = 0.2)
+
+  xmax <- max(mcols(dds)$dispFit, na.rm=T)
 
   # add form of the fitted function
   coefs_trend <- attr(dispersionFunction(dds), "coefficients")
-  text(x = 1e4,
+  text(x = xmax**0.8,
        y = 0.8*ymax, 
        as.expression(substitute(alpha[tr](mu) == A + frac(B, mu), 
                                 list(A = as.name(coefs_trend[[1]]),

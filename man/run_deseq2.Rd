@@ -4,37 +4,20 @@
 \alias{run_deseq2}
 \title{Run DESEQ2 algorithm.}
 \usage{
-run_deseq2(
-  object,
-  design = NULL,
-  lfcShrink_type = "apeglm",
-  contrasts,
-  ncores = 1,
-  alpha = 0.1,
-  save_table = F,
-  only_significant = T
-)
+run_deseq2(object, design = NULL, contrasts, opts_algo, opts_comm)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
 
-\item{design}{a formula specifying the design for the modelMatrix of DESeq2. Any variable appearing should be present
-in the colData of object.}
-
-\item{lfcShrink_type}{(optional) a character vector specifying type parameter of \code{lfcShrink}}
+\item{design}{a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be present
+in the \code{colData} of object}
 
 \item{contrasts}{(optional) a character vector specifying the contrasts (one or multiple beta coefficient) to be used
-for making tests and building results table. If set to NULL, one table for each element of resultsNames(dds_main)
-will be built.}
+for making tests and building results table. If set to NULL, one table for each element of \code{resultsNames(dds)}
+will be built}
 
-\item{ncores}{(optional) an integer specifying the number of cores available for running DESeq2}
-
-\item{alpha}{(optional) the FDR rate level for multiple testing}
-
-\item{save_table}{(optional) whether the table of resutls should be written in a text file or not.}
-
-\item{only_significant}{(optional) whether the table of resutls should include only the variables with padj < alpha
-not.}
+\item{opts_algo}{a named list of options passed to \code{DESeq}, \code{results} and \code{lfcShrink} functions. See
+\code{\link[DESeq2]{DEseq}}, \code{\link[DESeq2]{results}}, \code{\link[DESeq2]{lfcShrink}}}
 }
 \value{
 dataframe with results

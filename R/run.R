@@ -1,4 +1,4 @@
-# @modified: 12 Nov 2020
+# @modified: 16 Nov 2020
 # @created: 12 Nov 2020
 # @author: Yoann Pradat
 # 
@@ -17,31 +17,43 @@
 #' 
 #' @return dataframe with results
 #' @param object a \code{SummarizedExperiment} object
-#' @param design a formula specifying the design for the modelMatrix of DESeq2. Any variable appearing should be present
-#' in the colData of object.
-#' @param lfcShrink_type (optional) a character vector specifying type parameter of \code{lfcShrink}
+#' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be present
+#' in the \code{colData} of object
 #' @param contrasts (optional) a character vector specifying the contrasts (one or multiple beta coefficient) to be used
-#' for making tests and building results table. If set to NULL, one table for each element of resultsNames(dds_main)
-#' will be built.
-#' @param ncores (optional) an integer specifying the number of cores available for running DESeq2
-#' @param alpha (optional) the FDR rate level for multiple testing
-#' @param save_table (optional) whether the table of resutls should be written in a text file or not.
-#' @param only_significant (optional) whether the table of resutls should include only the variables with padj < alpha
-#' not.
+#' for making tests and building results table. If set to NULL, one table for each element of \code{resultsNames(dds)}
+#' will be built
+#' @param opts_algo a named list of options passed to \code{DESeq}, \code{results} and \code{lfcShrink} functions. See
+#' \code{\link[DESeq2]{DEseq}}, \code{\link[DESeq2]{results}}, \code{\link[DESeq2]{lfcShrink}}
 #'
-#' @importFrom DESeq2 DESeq results lfcShrink
+#' @import DESeq2
+#' @importFrom BiocParallel MulticoreParam
 #'
 #' @author Yoann Pradat
 #'
 #' @references
 #' Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with
 #' DESeq2. Genome Biology, 15:550. \url{https://doi.org/10.1186/s13059-014-0550-8}
-run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, ncores=1, 
-                       alpha=0.1, save_table=F, only_significant=T){
+run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
+
+  # 0. options and settings ============================================================================================
+
+  # Options for the function \code{DESeq}
+  lfcThreshold <- opts_algo$lfcThreshold
+  ncores <- opts_comm$ncores
+
+  # Options for the function \code{results}
+  alpha <- opts_comm$alpha
+
+  # Options for the function \code{lfcShrink}
+  lfcShrink_type <- opts_algo$lfcShrink_type
+  altHypothesis <- opts_algo$altHypothesis 
+
+  # Options for saving
+  save_table <- opts_comm$save_table
+  only_significant <- opts_comm$only_significant
 
   # init results folder
-  cwd <- setwd_to_results()
-  folder_results <- "./rna/deseq2"
+  folder_results <- file.path(opts_comm$folder_results, "deseq2")
   dir.create(folder_results, showWarnings=F, recursive=T)
 
   # used only if save_table is TRUE
@@ -49,13 +61,11 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
 
   # for file names and plot titles
   meta_char <- paste(lapply(metadata(object), function(x) paste(x, collapse="_")), collapse="-")
-  design_char <- paste(design(dds), collapse="")
+  design_char <- paste(design, collapse="")
 
   # 1. build dds object ================================================================================================
   cat("Building the DESeqDataSet object ...\n")
-  cat(paste(rep("=", 60), collapse=""), "\n")
-
-  dds <- load_to_deseq2(object, design)
+  dds <- load_to_deseq2(object=object, design=design)
 
   # 2. fit the deseq2 models ===========================================================================================
   cat("Fitting the DESeq2 models ...\n")
@@ -79,25 +89,23 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
                parallel=T, 
                BPPARAM=BPPARAM)
 
-  cat(paste(rep("=", 60), collapse=""), "\n")
-
   # save plot dispersion
-  filename <- paste0("deseq2_dispersion_", meta_char, ".pdf")
+  filename <- paste0("deseq2_dispersion_", meta_char, "_", design_char, ".pdf")
   title <- paste("Dispersion plot on:", meta_char)
-  plot_dispersion(dds, filepath=file.path(folder_results, filename), title=title, subtitle=design_char)
+  plot_dispersion_deseq2(dds, filepath=file.path(folder_results, filename), title=title, subtitle=design_char)
 
   # 3. results w/wo lcf shrinkage ===========================================================================================
   
   # # Exploration of the link between designs
-  # # - ~condition + genotype + genotype:condition
-  # # - ~condition + genotype:condition
+  # # - ~genotype + condition + genotype:condition
+  # # - ~genotype + genotype:condition
   #
   # dds1 <- makeExampleDESeqDataSet(n=100,m=18)
   # dds1$genotype <- factor(rep(rep(c("I","II","III"),each=3),2))
   # design(dds1) <- ~ genotype + condition + genotype:condition
   # dds1 <- DESeq(dds1)
-  # design(dds1) <- ~ genotype + genotype:condition
-  # dds2 <- DESeq(dds1)
+  # design(dds2) <- ~ genotype + genotype:condition
+  # dds2 <- DESeq(dds2)
   # resultsNames(dds1)
   # resultsNames(dds2)
   # 
@@ -140,8 +148,8 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
     # The statistic is based on the MLE of LFC
     resLFC_MLE <- results(object=dds,
                           contrast=contrasts[[contrast_name]],
-                          lfcThreshold=0,                    # if specifying lfcThreshold, tests are Wald tests
-                          altHypothesis="greaterAbs",
+                          lfcThreshold=lfcThreshold,         # if specifying lfcThreshold, tests are Wald tests
+                          altHypothesis=altHypothesis,
                           alpha=alpha,                       # for p-value adjustment level
                           filter=mcols(dds)$baseMean,
                           independentFiltering=T,            # for choosing genes whose p-values will be ajdusted
@@ -155,13 +163,15 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
     # WARNING: the p-values are unchanged, only lfc and lfcSE change (with lfcSE being a posterior SD here).
     resLFC_shrink <- NULL
 
-    if (lfcShrink_type=="normal"){
+    if (is.null(lfcShrink_type)){
+      resLFC_shrink <- NULL
+    } else if (lfcShrink_type=="normal"){
       if (any(attr(terms.formula(design(dds)),"order") > 1)){
         cat("Interactions with lfcShrink='normal' is not implemented. Skipping.\n")
       } else {
       # Normal LFC prior is a zero-centered Gaussian (original in DESeq2). Not available with interactions.
       resLFC_shrink <- lfcShrink(dds=dds, 
-                                 contrast=contrasts[contrast_name],
+                                 contrast=contrasts[[contrast_name]],
                                  type=lfcShrink_type,
                                  format="DataFrame",
                                  parallel=T,
@@ -173,7 +183,7 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
       } else {
         # Apeglm sets a Cauchy prior with null location
         resLFC_shrink <- lfcShrink(dds=dds, 
-                                   coef=contrasts[[contrast_name]],
+                                   coef=unlist(contrasts[[contrast_name]]),
                                    type=lfcShrink_type,
                                    format="DataFrame",
                                    parallel=T,
@@ -183,7 +193,7 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
   
     plot_MA_deseq2(resLFC_MLE=resLFC_MLE,
                    resLFC_shrink=resLFC_shrink,
-                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, ".pdf")), 
+                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, "_", design_char, ".pdf")), 
                    title=paste("LFC over mean norm counts on:", meta_char),
                    subtitle=paste(design_char, lfc_description))
 
@@ -217,7 +227,13 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
       keep <- rep(T, nrow(resLFC_MLE))
     }
 
-    tags <- list("meta"=meta_char, "design"=design_char, "contrast"=lfc_description)
+    if (grepl("contrast_ref", contrast_name)){
+      contrast_char <- sub("contrast_ref_", "\\2", contrast_name)
+    } else {
+      contrast_char <- sub("(.*)(?=:\\s):\\s", "\\2", lfc_description, perl=T)
+    }
+
+    tags <- list("meta"=meta_char, "design"=design_char, "contrast"=contrast_char)
     extra <- list(time=as.character(Sys.time()))
     table_results <- cbind.data.frame(c(tags, extra), resLFC_MLE[keep,])
     table_results <- cbind.data.frame(rowData(object[keep,]), table_results)
@@ -229,7 +245,6 @@ run_deseq2 <- function(object, design=NULL, lfcShrink_type="apeglm", contrasts, 
     table_results_all <- rbind(table_results_all, table_results)
   }
 
-  setwd(cwd)
   table_results_all
 }
 

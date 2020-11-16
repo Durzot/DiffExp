@@ -18,8 +18,10 @@ For now, the following methods have been studied:
       the refitting at the end of `estimateDispersionGeneEst` and some other refittings.
 
 - `limmaVoom`
-    1. **TODO**
+    1. **Done**
     - Read the paper <https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-2-r29>
+    - Read the paper <https://academic.oup.com/nar/article/43/7/e47/2414268>
+    2. **TODO**
     - Read the code in details
     - Used it on a project.
     - Skimmed through the vignette

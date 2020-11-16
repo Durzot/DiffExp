@@ -1,6 +1,6 @@
 Package: DiffExp
 Title: Runs different methods of differential expression analysis
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Yoann",
            family = "Pradat",
@@ -12,5 +12,12 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Imports:
+    apeglm,
+    BiocParallel,
+    DESeq2,
+    edgeR,
+    S4Vectors,
+    SummarizedExperiment
 Suggests: 
     testthat

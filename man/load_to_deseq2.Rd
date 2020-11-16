@@ -12,6 +12,9 @@ load_to_deseq2(object, design = NULL)
 \item{design}{a formula or matrix that expresses how the counts for each variable depend on the variables in
 \code{colData}. See \code{\link[DESeq2]{DESeqDataSet}}.}
 }
+\value{
+a \code{DESeq2DataSet} object
+}
 \description{
 Transform \code{SummarizedExperiment} object to \code{\link[DESeq2]{DESeq2DataSet}} object.
 }

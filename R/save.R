@@ -57,7 +57,7 @@ save_update_table <- function(file, tab_new, tags, verbose=T){
     }
   } else {
     tab <- read.table(file, header=T, sep="\t")
-    tab <- update_table(tab, tab_new, tags)
+    tab_new <- update_table(tab, tab_new, tags)
     if (verbose){
       cat(paste("updated table at", file), "\n")
     }

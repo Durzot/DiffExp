@@ -1,4 +1,4 @@
-# @modified: 12 Nov 2020
+# @modified: 16 Nov 2020
 # @created: 28 Oct 2020
 # @author: Yoann Pradat
 # 
@@ -10,18 +10,14 @@
 #     Prism Center
 #     114 rue Edouard Vaillant, Villejuif, 94800 France
 # 
-# Apply the DESeq 2 R library on the RNA-seq data.
-# 
-# Reference
-# ---------
-# Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with
-# DESeq2. Genome Biology, 15:550. 10.1186/s13059-014-0550-8
 
 #' Define the parameters specific to each differential analysis method.
 #'
 #' @param alpha fdr level when adjusting for multiple testing.
-#' @param minreads the minimum number of reads a variable must have to be differentially analyzed.
 #' @param ncores number of cores available for doing parallel computations. Used in DESeq.
+#' @param save_table boolean to decide whether to save tables in txt files or not
+#' @param only_significant boolean to decide whether only significant (FDR) variables are kept in the results tables
+#' or not
 #' @param run_deseq2 boolean to choose to run DESeq2.
 #' @param run_edgeR boolean to choose to run edgeR.
 #' @param run_limma boolean to choose to run limma.
@@ -32,17 +28,24 @@
 #' @author Yoann Pradat
 #'
 #' @export
-config_default <- function(alpha=0.1,
-                           minreads=10,
-                           ncores=4,
-                           run_deseq2=T,
-                           run_edgeR=T,
-                           run_limma=T, ...){
+opts_diffexp_default <- function(alpha=0.1,
+                                 ncores=6,
+                                 save_table=T,
+                                 only_significant=T,
+                                 folder_results="./results",
+                                 run_deseq2=T,
+                                 run_edgeR=F,
+                                 run_limma=F, ...){
 
-  common <- list(alpha=alpha,
-                 minreads=minreads,
-                 ncores=ncores)
-  deseq2 <- list(run=run_deseq2, lfcShrink_type="apeglm")
+  common <- list(alpha=alpha, 
+                 ncores=ncores,
+                 save_table=save_table,
+                 only_significant=only_significant,
+                 folder_results=folder_results)
+  deseq2 <- list(run=run_deseq2, 
+                 lfcShrink_type="apeglm",
+                 altHypothesis="greaterAbs",
+                 lfcThreshold=0)
   edgeR <- list(run=run_edgeR)
   limma <- list(run=run_limma)
 
