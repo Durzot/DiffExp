@@ -18,6 +18,7 @@ Imports:
     DESeq2,
     edgeR,
     S4Vectors,
+    statmod,
     SummarizedExperiment
 Suggests: 
     testthat

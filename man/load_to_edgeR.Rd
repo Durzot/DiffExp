@@ -4,7 +4,7 @@
 \alias{load_to_edgeR}
 \title{Transform \code{SummarizedExperiment} object to \code{DGEList} object.}
 \usage{
-load_to_edgeR(object, design)
+load_to_edgeR(object)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}

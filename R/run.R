@@ -258,7 +258,49 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 #'
 #' McCarthy DJ, Chen Y, Smyth GK (2012). “Differential expression analysis of multifactor RNA-Seq experiments with
 #' respect to biological variation.” Nucleic Acids Research, 40(10), 4288-4297. \url{https://doi.org/10.1093/nar/gks042}
-run_edgeR <- function(object){
+run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
+  # 0. options and settings ============================================================================================
+
+  # Options for the function \code{estimateDisp}
+  disp_trend_method <- opts_algo$disp_trend_method
+  disp_robust <- opts_algo$disp_robust
+
+  # Options for saving
+  save_table <- opts_comm$save_table
+  only_significant <- opts_comm$only_significant
+
+  # init results folder
+  folder_results <- file.path(opts_comm$folder_results, "edgeR")
+  dir.create(folder_results, showWarnings=F, recursive=T)
+
+  # used only if save_table is TRUE
+  file_table_results <- file.path(folder_results, "table_results.txt")
+
+  # for file names and plot titles
+  meta_char <- paste(lapply(metadata(object), function(x) paste(x, collapse="_")), collapse="-")
+  design_char <- paste(design, collapse="")
+
+  # 1. build the DGEList object ========================================================================================
+  cat("Building the DGEList object ...\n")
+  dgel <- load_to_edgeR(object=object)
+
+  # design matrix
+  design_matrix <- model.matrix(design, data=colData(object))
+
+  # 2. fit the dispersions and LFCs ====================================================================================
+
+  # equivalent to running sucessively
+  #   object <- estimateGLMCommonDisp(object, design)
+  #   object <- estimateGLMTrendedDisp(object, design)
+  #   object <- estimateGLMTagwiseDisp(object, design)
+  #
+  # - the trend method may be one of "locfit", "none", "movingave", "loess" and "locfit.mixed"
+  # - robust specifies the method used in estimation of prior.df
+  dgel <- estimateDisp(dgel, design_matrix,
+                       prior.df=NULL,
+                       trend.method=disp_trend_method,
+                       robust=disp_robust)
+
   return(T)
 }
 

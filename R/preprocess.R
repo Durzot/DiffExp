@@ -8,19 +8,20 @@
 #'
 #' @return a \code{SummarizedExperiment} object
 #' @param object a \code{SummarizedExperiment} object
-#' @param design a formula object specifying the design matrix
-#' @param min_count \code{min.count} param of \code{\link[edgeR]{filterByExpr}}
-#' @param min_total_count \code{min.count} param of \code{\link[edgeR]{filterByExpr}}
-#' @param large_n \code{large.n} param of \code{\link[edgeR]{filterByExpr}}
-#' @param min_prop \code{min.prop} param of \code{\link[edgeR]{filterByExpr}}
-#' @param norm_factors_method \code{method} argument of \code{\link[edgeR]{calcNormFactors}}.
+#' @param opts_prepro a named list of options. See \code{\link{opts_prepro}}
 #'  
 #' @importFrom edgeR filterByExpr calcNormFactors
 #'
 #' @author Yoann Pradat
 #' @export
-preprocess_object <- function(object, design=NULL, min_count=10, min_total_count=15, large_n=10, min_prop=0.7,
-                              norm_factors_method=c("TMM", "TMMwsp", "RLE", "upperquartile", "none")){
+preprocess_object <- function(object, opts_prepro){
+  # options
+  design <- opts_prepro$design
+  min_count <- opts_prepro$min_count
+  min_total_count <- opts_prepro$min_total_count
+  large_n <- opts_prepro$large_n
+  min_prop <- opts_prepro$min_prop
+  norm_factors_method <- opts_prepro$norm_factors_method
 
   # get design matrix
   if (is.null(design)){
@@ -45,10 +46,10 @@ preprocess_object <- function(object, design=NULL, min_count=10, min_total_count
   counts <- counts[keep,]
 
   # compute normalization factors
-  if ("normFactors" %in% colnames(rowData(object))){
-    rowData(object)[,"normFactors"] <- NULL
+  if ("norm.factors" %in% colnames(rowData(object))){
+    rowData(object)[,"norm.factors"] <- NULL
   }
-  object$normFactors <- calcNormFactors(counts, method=norm_factors_method)
+  object$norm.factors <- calcNormFactors(counts, method=norm_factors_method)
 
   # update counts
   assays(object)$counts <- counts

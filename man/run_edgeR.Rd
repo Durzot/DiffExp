@@ -4,7 +4,7 @@
 \alias{run_edgeR}
 \title{Run edgeR algorithm.}
 \usage{
-run_edgeR(object)
+run_edgeR(object, design = NULL, opts_algo, opts_comm)
 }
 \description{
 Run edgeR algorithm.

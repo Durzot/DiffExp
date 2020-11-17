@@ -4,30 +4,12 @@
 \alias{preprocess_object}
 \title{Perform preprocessing steps.}
 \usage{
-preprocess_object(
-  object,
-  design = NULL,
-  min_count = 10,
-  min_total_count = 15,
-  large_n = 10,
-  min_prop = 0.7,
-  norm_factors_method = c("TMM", "TMMwsp", "RLE", "upperquartile", "none")
-)
+preprocess_object(object, opts_prepro)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
 
-\item{design}{a formula object specifying the design matrix}
-
-\item{min_count}{\code{min.count} param of \code{\link[edgeR]{filterByExpr}}}
-
-\item{min_total_count}{\code{min.count} param of \code{\link[edgeR]{filterByExpr}}}
-
-\item{large_n}{\code{large.n} param of \code{\link[edgeR]{filterByExpr}}}
-
-\item{min_prop}{\code{min.prop} param of \code{\link[edgeR]{filterByExpr}}}
-
-\item{norm_factors_method}{\code{method} argument of \code{\link[edgeR]{calcNormFactors}}.}
+\item{opts_prepro}{a named list of options. See \code{\link{opts_prepro}}}
 }
 \value{
 a \code{SummarizedExperiment} object

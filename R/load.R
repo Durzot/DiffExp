@@ -27,12 +27,12 @@ load_to_deseq2 <- function(object, design=NULL){
   # add row data
   mcols(dds) <- cbind(mcols(dds), rowData(object))
 
-  if ("normFactors" %in% colnames(colData(dds))){
-    sizeFactors(dds) <- colData(dds)$normFactors
-    colData(dds)$normFactors <- NULL
+  if ("norm.factors" %in% colnames(colData(dds))){
+    sizeFactors(dds) <- colData(dds)$norm.factors
+    colData(dds)$norm.factors <- NULL
   }
 
-  return(dds)
+  dds
 }
 
 #' Transform \code{SummarizedExperiment} object to \code{DGEList} object.
@@ -46,26 +46,27 @@ load_to_deseq2 <- function(object, design=NULL){
 #' @author Yoann Pradat
 #'
 #' @keywords internal
-load_to_edgeR <- function(object, design){
-  # counts
-  count_data <- as.matrix(assays(object)$counts)
-  mode(count_data) <- "integer"
-  
-  # design
-  design_matrix <- model.matrix(design, data=colData(object))
+load_to_edgeR <- function(object){
+
+  # norm factors if any
+  if ("norm.factors" %in% colnames(colData(object))){
+    norm_factors <- colData(object)$norm.factors
+  } else{
+    norm_factors <- NULL
+  }
 
   # DGEList
-  dgel <- DGEList(counts=count_data,
-                  lib.siz=colSums(count_data),
-                  norm.factors=NULL,
-                  gene=rowData(object))
-  # method=RLE is the same scaling method as DESeq2
-  # method=TMM is trimmed mean M-values method.
-  dgel <- calcNormFactors(object=dgel, method="RLE") 
-  dgel <- filterByExpr(dgel, design_matrix)
+  dgel <- DGEList(counts=assays(object)$count,
+                  lib.size=NULL, # default to colSums(counts)
+                  norm.factors=norm_factors,
+                  samples=colData(object),
+                  gene=rowData(object),
+                  remove.zeros=F)
 
-  return(T)
+  dgel
 }
+
+run_edgeR
 
 #' Transform \code{SummarizedExperiment} object to ????
 #'
@@ -75,5 +76,5 @@ load_to_edgeR <- function(object, design){
 #'
 #' @keywords internal
 load_to_limma <- function(object){
-  return(T)
+  T
 }
