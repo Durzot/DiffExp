@@ -213,7 +213,8 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 
     plot_MA_deseq2(resLFC_MLE=resLFC_MLE,
                    resLFC_shrink=resLFC_shrink,
-                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, "_", design_char, ".pdf")), 
+                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, "_", design_char, "_", 
+                                                             contrast_name, ".pdf")), 
                    title=paste("LFC over mean norm counts on:", meta_char),
                    subtitle=paste("design:", design_char, "     contrast:", contrast_name))
 
