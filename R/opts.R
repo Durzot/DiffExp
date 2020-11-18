@@ -73,7 +73,7 @@ opts_diffexp <- function(alpha=0.1,
                          only_significant=T,
                          folder_results="./results",
                          use_deseq2=T,
-                         use_edgeR=F,
+                         use_edgeR=T,
                          use_limma=F, ...){
 
   common <- list(alpha=alpha, 

@@ -4,12 +4,12 @@
 \alias{preprocess_object}
 \title{Perform preprocessing steps.}
 \usage{
-preprocess_object(object, opts_prepro)
+preprocess_object(object, opts)
 }
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
 
-\item{opts_prepro}{a named list of options. See \code{\link{opts_prepro}}}
+\item{opts}{a named list of options. See \code{\link{opts_prepro}}}
 }
 \value{
 a \code{SummarizedExperiment} object
