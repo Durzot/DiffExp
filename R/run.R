@@ -168,19 +168,19 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
       if (any(attr(terms.formula(design(dds)),"order") > 1)){
         cat("Interactions with lfcShrink='normal' is not implemented. Skipping.\n")
       } else {
-      # Normal LFC prior is a zero-centered Gaussian (original in DESeq2). Not available with interactions.
-      resLFC_shrink <- lfcShrink(dds=dds, 
-                                 contrast=contrast_vec,
-                                 type=lfc_fit_shrink_type,
-                                 format="DataFrame",
-                                 parallel=T,
-                                 BPPARAM=BPPARAM)
+        # Normal LFC prior is a zero-centered Gaussian (original in DESeq2). Not available with interactions.
+        resLFC_shrink <- lfcShrink(dds=dds, 
+                                   contrast=contrast_vec,
+                                   type=lfc_fit_shrink_type,
+                                   format="DataFrame",
+                                   parallel=T,
+                                   BPPARAM=BPPARAM)
       }
     } else if(lfc_fit_shrink_type=="apeglm"){
       if (sum(contrast_vec==1) != 1){
-          cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
+        cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
       } else if (resultsNames(dds)[contrast_vec==1] != rownames(contrast_vec)[contrast_vec==1]){
-          cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
+        cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
       } else {
         # Apeglm sets a Cauchy prior with null location
         resLFC_shrink <- lfcShrink(dds=dds, 
