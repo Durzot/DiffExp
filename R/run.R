@@ -311,6 +311,7 @@ run_edgeR <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
   design_matrix <- model.matrix(design, data=colData(object))
 
   # 2. fit the dispersions =============================================================================================
+  cat("Fitting the edgeR models ...\n")
 
   # equivalent to running sucessively
   #   object <- estimateGLMCommonDisp(object, design)
