@@ -143,7 +143,7 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
   for (contrast_name in names(contrasts)){
     contrast <- contrasts[[contrast_name]]
     contrast_vec <- get_contrast_vector(contrast=contrast, 
-                                        design=design, data=as.data.frame(colData(object)))
+                                        design=design, data=as.data.frame(colData(dds)))
 
     # No LFC shrinkage
     # The statistic is based on the MLE of LFC

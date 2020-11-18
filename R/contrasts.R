@@ -140,3 +140,85 @@ get_contrast_vector <- function(contrast, design, data){
   eval(parse(text = cmd))
   contrast_vec
 }
+
+
+#' Build a list of character contrasts of B-A for an interacting variable.
+#' 
+#' @param condition the factor vector of condition values
+#' @param interaction the factor vector of interaction values
+#' @param cond_name the name of the condition variable
+#' @param inte_name the name of the interaction variable
+#' @param level_B_cond the B level to be contrasted with A
+#' @param level_A_cond the A level to be contrasted with B
+#' @param cond_main_effect is the condition a main effect
+#' @param inte_main_effect is the interaction a main effect
+#'
+#' @author Yoann Pradat
+#'
+#' @references internal
+get_contrast_condition_B_minus_A_factors_interaction <- function(condition, interaction, cond_name="condition",
+                                                                 inte_name="interaction",
+                                                                 level_B_cond=NULL, 
+                                                                 level_A_cond=NULL, 
+                                                                 cond_main_effect=T, inte_main_effect=F){
+
+  if (!is.factor(condition)){
+    stop("condition is not a factor")
+  }
+
+  if (!is.factor(interaction)){
+    stop("condition is not a factor")
+  }
+
+  if (!cond_main_effect & !inte_main_effect){
+    stop("when using an interaction between two factor variables, at least one variable should be a main effect")
+  }
+
+  condition <- droplevels(condition)
+  interaction <- droplevels(interaction)
+  levels_cond <- levels(condition)
+  levels_inte <- levels(interaction)
+  ref_cond <- levels_cond[1]
+  ref_inte <- levels_inte[1]
+
+  if (is.null(level_B_cond)){
+    message("unspecified level condition B, choosing the last level")
+    level_B_cond <- levels_cond[length(levels_cond)]
+  }
+
+  if (is.null(level_A_cond)){
+    message("unspecified level condition A, choosing the first (i.e the reference) level")
+    level_A_cond <- ref_cond
+  }
+
+  if (level_A_cond == level_B_cond){
+    stop("condition levels A and B to be contrasted are equal")
+  }
+
+  contrasts <- list()
+
+  if (cond_main_effect & !inte_main_effect){
+    for (level_inte in levels_inte){
+      contrast_name <- paste(cond_name, level_B_cond, "vs", level_A_cond, inte_name, level_inte, sep="_")
+
+      if (level_inte == ref_inte){
+        if (level_A_cond == ref_cond){
+          contrast_expr <- paste0(cond_name, level_B_cond)
+        } else if (level_B_cond == ref_cond) {
+          contrast_expr <- paste0("-", cond_name, level_A_cond)
+        } else {
+          contrast_expr <- paste0(cond_name, level_B_cond, "-", cond_name, level_A_cond)
+        }
+      } else {
+        contrast_expr <- paste(paste0(cond_name, level_B_cond, ".", inte_name, level_inte),
+                               paste0(cond_name, level_A_cond, ".", inte_name, level_inte),
+                               sep="-")
+      }
+      contrasts[[contrast_name]] <- contrast_expr
+    }
+  } else {
+    stop ("Not yet implemented")
+  }
+
+  contrasts
+}
