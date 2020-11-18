@@ -11,8 +11,8 @@ designs_run <- list("design_1"= ~ genotype + condition + genotype:condition,
                     "design_2"= ~ genotype + genotype:condition)
 
 # genotype_I.condition_B_vs_A: the condition effect for genotype I (the main effect)
-contrasts_run <- list("design_1"=list("genotype_I.condition_B_vs_A"="condition_B_vs_A"),
-                      "design_2"=list("genotype_I.condition_B_vs_A"="genotypeI.condition_B_vs_A"))
+contrasts_run <- list("design_1"=list("genotype_I.condition_B_vs_A"="conditionB"),
+                      "design_2"=list("genotype_I.condition_B_vs_A"="genotypeI.conditionB"))
 
 # load options
 opts <- list()
