@@ -6,6 +6,9 @@ tests/**.pdf
 docs/**/build/**/*.*
 !docs/**/build/**/*.pdf
 
+# Development specs
+*.Rprofile
+
 # Specs
 .tool-versions
 
