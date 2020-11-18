@@ -8,20 +8,20 @@
 #'
 #' @return a \code{SummarizedExperiment} object
 #' @param object a \code{SummarizedExperiment} object
-#' @param opts_prepro a named list of options. See \code{\link{opts_prepro}}
+#' @param opts a named list of options. See \code{\link{opts_prepro}}
 #'  
 #' @importFrom edgeR filterByExpr calcNormFactors
 #'
 #' @author Yoann Pradat
 #' @export
-preprocess_object <- function(object, opts_prepro){
+preprocess_object <- function(object, opts){
   # options
-  design <- opts_prepro$design
-  min_count <- opts_prepro$min_count
-  min_total_count <- opts_prepro$min_total_count
-  large_n <- opts_prepro$large_n
-  min_prop <- opts_prepro$min_prop
-  norm_factors_method <- opts_prepro$norm_factors_method
+  design <- opts$design
+  min_count <- opts$min_count
+  min_total_count <- opts$min_total_count
+  large_n <- opts$large_n
+  min_prop <- opts$min_prop
+  norm_factors_method <- opts$norm_factors_method
 
   # get design matrix
   if (is.null(design)){
