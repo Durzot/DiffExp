@@ -143,8 +143,8 @@ plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
   xmin <- min(dgel$AveLogCPM, na.rm=T)
   xmax <- max(dgel$AveLogCPM, na.rm=T)
 
-  ymin <- min(dgel$trended.dispersion, na.rm=T)
-  ymax <- max(dgel$trended.dispersion, na.rm=T)
+  ymin <- min(dgel$tagwise.dispersion, na.rm=T)
+  ymax <- max(dgel$tagwise.dispersion, na.rm=T)
 
   # add annotations
   text(x = 0.5*xmax + 0.5*xmin,
