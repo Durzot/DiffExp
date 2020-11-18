@@ -1,6 +1,7 @@
 # Project specific
 tools/DESeq2paper/data
-tests/**.pdf
+tests/**/*.pdf
+tests/**/*.txt
 
 # Tex build
 docs/**/build/**/*.*
