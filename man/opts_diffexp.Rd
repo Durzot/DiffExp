@@ -11,7 +11,7 @@ opts_diffexp(
   only_significant = T,
   folder_results = "./results",
   use_deseq2 = T,
-  use_edgeR = F,
+  use_edgeR = T,
   use_limma = F,
   ...
 )

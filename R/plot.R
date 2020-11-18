@@ -133,6 +133,12 @@ plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
       width = 6,
       height = 6)
 
+  xmin <- min(dgel$AveLogCPM, na.rm=T)
+  xmax <- max(dgel$AveLogCPM, na.rm=T)
+
+  ymin <- min(dgel$tagwise.dispersion, na.rm=T)
+  ymax <- max(dgel$tagwise.dispersion, na.rm=T)
+
   # plot
   edgeR::plotBCV(y=dgel,
                  cex=0.6,
@@ -140,21 +146,15 @@ plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
                  col.trend="red",
                  col.tagwise="black")
 
-  xmin <- min(dgel$AveLogCPM, na.rm=T)
-  xmax <- max(dgel$AveLogCPM, na.rm=T)
-
-  ymin <- min(dgel$tagwise.dispersion, na.rm=T)
-  ymax <- max(dgel$tagwise.dispersion, na.rm=T)
-
   # add annotations
   text(x = 0.5*xmax + 0.5*xmin,
-       y = 0.95*ymax + 0.05*ymin,
+       y = 0.90*ymax + 0.1*ymin,
        bquote("Common BCV:" ~ hat(phi)^frac(1,2) == .(sqrt(dgel$common.dispersion))),
        cex = 0.8)
 
   # add annotations
   text(x = 0.5*xmax + 0.5*xmin,
-       y = 0.9*ymax + 0.1*ymin,
+       y = 0.85*ymax + 0.15*ymin,
        paste("Trend meth:", dgel$trend.method),
        cex = 0.8)
 
