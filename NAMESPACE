@@ -3,6 +3,8 @@
 export(opts_diffexp)
 export(opts_prepro)
 export(preprocess_object)
+export(run_deseq2)
+export(run_edgeR)
 import(DESeq2)
 import(SummarizedExperiment)
 import(edgeR)

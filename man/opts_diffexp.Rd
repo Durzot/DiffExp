@@ -34,6 +34,9 @@ or not}
 
 \item{...}{extra parameters added to the configuration list}
 }
+\value{
+a list
+}
 \description{
 Define the parameters specific to each differential analysis method.
 }

@@ -19,6 +19,9 @@ be used for making tests and building results table.}
 
 \item{opts_comm}{a named list of options common to all methods}
 }
+\value{
+a dataframe of results
+}
 \description{
 Run edgeR algorithm.
 }

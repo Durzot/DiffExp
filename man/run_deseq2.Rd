@@ -15,12 +15,12 @@ present in the \code{colData} of object}
 \item{contrasts}{a character vector specifying the contrasts (one or multiple beta coefficient) to
 be used for making tests and building results table.}
 
-\item{opts_algo}{a named list of options specific to edgeR}
+\item{opts_algo}{a named list of options specific to DESeq2}
 
 \item{opts_comm}{a named list of options common to all methods}
 }
 \value{
-dataframe with results
+a dataframe of results
 }
 \description{
 Run DESEQ2 algorithm.

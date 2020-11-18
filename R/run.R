@@ -12,45 +12,23 @@
 # 
 # One function for running the main functions of each differential analysis procedure.
 
-make_table_results <- function(res_data, tags, only_significant=T, alpha=0.1, df_results_all=NULL, df_row=NULL, 
-                               file_table_results=NULL){
-    # make it a dataframe
-    df_results <- data.frame(res_data)
-    extra_tags <- list(time=as.character(Sys.time()))
-    df_results <- cbind.data.frame(df_row, c(tags, extra_tags), df_results)
-
-    # decide if all the table is recorded or not
-    if (only_significant){
-      keep <- !is.na(res_data$padj) & res_data$padj < alpha
-    } else {
-      keep <- rep(T, nrow(df_results))
-    }
-    df_results <- df_results[keep,]
-
-    # save if specified
-    if (!is.null(file_table_results)){
-      save_update_table(file_table_results, df_results, tags)
-    }
-
-    # append
-    rbind(df_results_all, df_results)
-}
- 
 #' Run DESEQ2 algorithm.
 #' 
-#' @return dataframe with results
+#' @return a dataframe of results
 #' @param object a \code{SummarizedExperiment} object
 #' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be 
 #' present in the \code{colData} of object
 #' @param contrasts a character vector specifying the contrasts (one or multiple beta coefficient) to 
 #' be used for making tests and building results table. 
-#' @param opts_algo a named list of options specific to edgeR
+#' @param opts_algo a named list of options specific to DESeq2
 #' @param opts_comm a named list of options common to all methods
 #'
 #' @import DESeq2
 #' @importFrom BiocParallel MulticoreParam
 #'
 #' @author Yoann Pradat
+#'
+#' @export
 #'
 #' @references
 #' Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with
@@ -253,12 +231,12 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
     # beta
     betas <- resLFC_MLE$log2FoldChange
 
-    df_results_all <- make_table_results(res_data=list(beta=betas, stat=stat, pval=pval, padj=padj),
+    df_results_all <- make_table_results(data=list(beta=betas, stat=stat, pval=pval, padj=padj),
                                          tags=list(meta=meta_char, design=design_char, contrast=contrast_name),
                                          only_significant=only_significant, alpha=alpha,
                                          df_results_all=df_results_all,
                                          df_row=rowData(object),
-                                         file_table_results=file_table_results)
+                                         file=file_table_results)
 
   }
 
@@ -266,9 +244,8 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 }
 
 #' Run edgeR algorithm.
-#' 
-#' @author Yoann Pradat
 #'
+#' @return a dataframe of results
 #' @param object a \code{SummarizedExperiment} object
 #' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be 
 #' present in the \code{colData} of object
@@ -279,6 +256,10 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 #'
 #' @import edgeR
 #' @importFrom stats p.adjust
+#'
+#' @author Yoann Pradat
+#'
+#' @export
 #'
 #' @references
 #' Robinson MD, McCarthy DJ, Smyth GK (2010). “edgeR: a Bioconductor package for differential expression analysis of
@@ -432,12 +413,12 @@ run_edgeR <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
     # for the particular coefficients tested
     betas <- glm_test$table$logFC
 
-    df_results_all <- make_table_results(res_data=list(beta=betas, stat=stat, pval=pval, padj=padj),
+    df_results_all <- make_table_results(data=list(beta=betas, stat=stat, pval=pval, padj=padj),
                                          tags=list(meta=meta_char, design=design_char, contrast=contrast_name),
                                          only_significant=only_significant, alpha=alpha,
                                          df_results_all=df_results_all,
                                          df_row=rowData(object),
-                                         file_table_results=file_table_results)
+                                         file=file_table_results)
   }
 
   df_results_all

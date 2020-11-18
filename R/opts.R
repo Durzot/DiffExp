@@ -13,7 +13,10 @@
 
 #' Define the options for \code{\link{preprocess_object}}
 #'
-#' @return a \code{SummarizedExperiment} object
+#' See \code{edgeR::filterByExp} for more details about the filtering options and \code{edgeR::calcNormFactors}
+#' for mode details about the normalization options.
+#'
+#' @return a list
 #' @param design a formula object specifying the design matrix
 #' @param min_count \code{min.total.count} param of \code{\link[edgeR]{filterByExpr}}
 #' @param min_total_count \code{min.count} param of \code{\link[edgeR]{filterByExpr}}
@@ -48,6 +51,7 @@ opts_prepro <- function(design=NULL,
 
 #' Define the parameters specific to each differential analysis method.
 #'
+#' @return a list
 #' @param alpha fdr level when adjusting for multiple testing.
 #' @param ncores number of cores available for doing parallel computations. Used in DESeq.
 #' @param save_table boolean to decide whether to save tables in txt files or not

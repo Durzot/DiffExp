@@ -30,10 +30,11 @@ opts_prepro(
 \item{...}{extra parameters added to the options list}
 }
 \value{
-a \code{SummarizedExperiment} object
+a list
 }
 \description{
-Define the options for \code{\link{preprocess_object}}
+See \code{edgeR::filterByExp} for more details about the filtering options and \code{edgeR::calcNormFactors}
+for mode details about the normalization options.
 }
 \author{
 Yoann Pradat
