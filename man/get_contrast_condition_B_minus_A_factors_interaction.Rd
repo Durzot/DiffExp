@@ -36,7 +36,7 @@ get_contrast_condition_B_minus_A_factors_interaction(
 Build a list of character contrasts of B-A for an interacting variable.
 }
 \references{
-internal
+export
 }
 \author{
 Yoann Pradat
