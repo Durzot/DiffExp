@@ -155,7 +155,7 @@ get_contrast_vector <- function(contrast, design, data){
 #'
 #' @author Yoann Pradat
 #'
-#' @references export
+#' @export
 get_contrast_condition_B_minus_A_factors_interaction <- function(condition, interaction, cond_name="condition",
                                                                  inte_name="interaction",
                                                                  level_B_cond=NULL, 
