@@ -9,15 +9,15 @@ run_deseq2(object, design = NULL, contrasts, opts_algo, opts_comm)
 \arguments{
 \item{object}{a \code{SummarizedExperiment} object}
 
-\item{design}{a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be present
-in the \code{colData} of object}
+\item{design}{a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be
+present in the \code{colData} of object}
 
-\item{contrasts}{(optional) a character vector specifying the contrasts (one or multiple beta coefficient) to be used
-for making tests and building results table. If set to NULL, one table for each element of \code{resultsNames(dds)}
-will be built}
+\item{contrasts}{a character vector specifying the contrasts (one or multiple beta coefficient) to
+be used for making tests and building results table.}
 
-\item{opts_algo}{a named list of options passed to \code{DESeq}, \code{results} and \code{lfcShrink} functions. See
-\code{\link[DESeq2]{DEseq}}, \code{\link[DESeq2]{results}}, \code{\link[DESeq2]{lfcShrink}}}
+\item{opts_algo}{a named list of options specific to edgeR}
+
+\item{opts_comm}{a named list of options common to all methods}
 }
 \value{
 dataframe with results

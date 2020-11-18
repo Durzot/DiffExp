@@ -42,7 +42,7 @@ load_to_deseq2 <- function(object, design=NULL){
 #' \code{colData}
 #'
 #' @import SummarizedExperiment
-#' @importFrom edgeR cpm
+#' @importFrom edgeR DGEList
 #' @author Yoann Pradat
 #'
 #' @keywords internal
@@ -65,8 +65,6 @@ load_to_edgeR <- function(object){
 
   dgel
 }
-
-run_edgeR
 
 #' Transform \code{SummarizedExperiment} object to ????
 #'

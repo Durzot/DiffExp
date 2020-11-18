@@ -44,6 +44,8 @@ plot_dispersion_deseq2 <- function(dds, filepath, title, subtitle=NULL){
   }
   title(title)
   dev.off()
+
+  cat(paste("DESeq2 dispersion plot saved at", filepath),"\n")
 }
 
 #' Plot MA from DESeq2
@@ -113,4 +115,81 @@ plot_MA_deseq2 <- function(resLFC_MLE, resLFC_shrink=NULL, filepath, title, subt
   }
 
   dev.off()
+  cat(paste("DESeq2 MA plot saved at", filepath),"\n")
+}
+
+#### edgeR PLOTS ======================================================================================================
+
+#' Plot dispersion estimates from edgeR
+#'
+#' @param dgel a \code{DGEList} object
+#' @param filepath a character specifying the path to the plot file
+#' @param title a character
+#' @param subtitle (optional) a character
+#'
+#' @keywords internal
+plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
+  pdf(file = filepath,
+      width = 6,
+      height = 6)
+
+  # plot
+  edgeR::plotBCV(y=dgel,
+                 cex=0.6,
+                 col.common="green",
+                 col.trend="red",
+                 col.tagwise="black")
+
+  xmin <- min(dgel$AveLogCPM, na.rm=T)
+  xmax <- max(dgel$AveLogCPM, na.rm=T)
+
+  ymin <- min(dgel$trended.dispersion, na.rm=T)
+  ymax <- max(dgel$trended.dispersion, na.rm=T)
+
+  # add annotations
+  text(x = 0.5*xmax + 0.5*xmin,
+       y = 0.95*ymax + 0.05*ymin,
+       bquote("Common BCV:" ~ hat(phi)^frac(1,2) == .(sqrt(dgel$common.dispersion))),
+       cex = 0.8)
+
+  # add annotations
+  text(x = 0.5*xmax + 0.5*xmin,
+       y = 0.9*ymax + 0.1*ymin,
+       paste("Trend meth:", dgel$trend.method),
+       cex = 0.8)
+
+  if(!is.null(subtitle)){
+    mtext(subtitle, side=3, line=0.2, cex=0.8, font=1L)
+  }
+  title(title)
+  dev.off()
+  cat(paste("edgeR dispersion plot saved at", filepath),"\n")
+}
+
+#' Plot dispersion estimates from edgeR
+#'
+#' @param glm_fit a \code{DGEGLM} object
+#' @param filepath a character specifying the path to the plot file
+#' @param title a character
+#' @param subtitle (optional) a character
+#'
+#' @keywords internal
+plot_dispersion_ql_edgeR <- function(glm_fit, filepath, title, subtitle=NULL){
+  pdf(file = filepath,
+      width = 6,
+      height = 6)
+
+  # plot
+  edgeR::plotQLDisp(glmfit=glm_fit,
+                    cex=0.6,
+                    col.raw="black",
+                    col.shrunk="dodgerblue",
+                    col.trend="red")
+
+  if(!is.null(subtitle)){
+    mtext(subtitle, side=3, line=0.2, cex=0.8, font=1L)
+  }
+  title(title)
+  dev.off()
+  cat(paste("edgeR ql dispersion plot saved at", filepath),"\n")
 }

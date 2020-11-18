@@ -79,13 +79,16 @@ opts_diffexp <- function(alpha=0.1,
                  folder_results=folder_results)
 
   deseq2 <- list(run=use_deseq2, 
-                 lfcShrink_type="apeglm",
-                 altHypothesis="greaterAbs",
-                 lfcThreshold=0)
+                 lfc_fit_shrink_type="apeglm",
+                 lfc_test_alt_hypothesis="greaterAbs",
+                 lfc_test_threshold=0)
 
   edgeR <- list(run=use_edgeR,
                 disp_trend_method="locfit",
-                disp_robust=TRUE)
+                disp_robust_prior_df=TRUE,
+                lfc_fit_robust_prior_ql_disp=TRUE,
+                lfc_test_type=c("QL","LRT"),
+                lfc_test_threshold=0)
 
   limma <- list(run=use_limma)
 

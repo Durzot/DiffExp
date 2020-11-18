@@ -1,4 +1,4 @@
-# @modified: 16 Nov 2020
+# @modified: 17 Nov 2020
 # @created: 12 Nov 2020
 # @author: Yoann Pradat
 # 
@@ -11,19 +11,41 @@
 #     114 rue Edouard Vaillant, Villejuif, 94800 France
 # 
 # One function for running the main functions of each differential analysis procedure.
- 
 
+make_table_results <- function(res_data, tags, only_significant=T, alpha=0.1, df_results_all=NULL, df_row=NULL, 
+                               file_table_results=NULL){
+    # make it a dataframe
+    df_results <- data.frame(res_data)
+    extra_tags <- list(time=as.character(Sys.time()))
+    df_results <- cbind.data.frame(df_row, c(tags, extra_tags), df_results)
+
+    # decide if all the table is recorded or not
+    if (only_significant){
+      keep <- !is.na(res_data$padj) & res_data$padj < alpha
+    } else {
+      keep <- rep(T, nrow(df_results))
+    }
+    df_results <- df_results[keep,]
+
+    # save if specified
+    if (!is.null(file_table_results)){
+      save_update_table(file_table_results, df_results, tags)
+    }
+
+    # append
+    rbind(df_results_all, df_results)
+}
+ 
 #' Run DESEQ2 algorithm.
 #' 
 #' @return dataframe with results
 #' @param object a \code{SummarizedExperiment} object
-#' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be present
-#' in the \code{colData} of object
-#' @param contrasts (optional) a character vector specifying the contrasts (one or multiple beta coefficient) to be used
-#' for making tests and building results table. If set to NULL, one table for each element of \code{resultsNames(dds)}
-#' will be built
-#' @param opts_algo a named list of options passed to \code{DESeq}, \code{results} and \code{lfcShrink} functions. See
-#' \code{\link[DESeq2]{DEseq}}, \code{\link[DESeq2]{results}}, \code{\link[DESeq2]{lfcShrink}}
+#' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be 
+#' present in the \code{colData} of object
+#' @param contrasts a character vector specifying the contrasts (one or multiple beta coefficient) to 
+#' be used for making tests and building results table. 
+#' @param opts_algo a named list of options specific to edgeR
+#' @param opts_comm a named list of options common to all methods
 #'
 #' @import DESeq2
 #' @importFrom BiocParallel MulticoreParam
@@ -38,26 +60,28 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
   # 0. options and settings ============================================================================================
 
   # Options for the function \code{DESeq}
-  lfcThreshold <- opts_algo$lfcThreshold
   ncores <- opts_comm$ncores
 
   # Options for the function \code{results}
   alpha <- opts_comm$alpha
+  lfc_test_threshold <- opts_algo$lfc_test_threshold
 
   # Options for the function \code{lfcShrink}
-  lfcShrink_type <- opts_algo$lfcShrink_type
-  altHypothesis <- opts_algo$altHypothesis 
+  lfc_fit_shrink_type <- opts_algo$lfc_fit_shrink_type
+  lfc_test_alt_hypothesis <- opts_algo$lfc_test_alt_hypothesis
 
   # Options for saving
-  save_table <- opts_comm$save_table
   only_significant <- opts_comm$only_significant
 
   # init results folder
   folder_results <- file.path(opts_comm$folder_results, "deseq2")
   dir.create(folder_results, showWarnings=F, recursive=T)
 
-  # used only if save_table is TRUE
-  file_table_results <- file.path(folder_results, "table_results.txt")
+  if (opts_comm$save_table) {
+    file_table_results <- file.path(folder_results, "table_results.txt")
+  } else {
+    file_table_results <- NULL
+  }
 
   # for file names and plot titles
   meta_char <- paste(lapply(metadata(object), function(x) paste(x, collapse="_")), collapse="-")
@@ -90,9 +114,11 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
                BPPARAM=BPPARAM)
 
   # save plot dispersion
-  filename <- paste0("deseq2_dispersion_", meta_char, "_", design_char, ".pdf")
-  title <- paste("Dispersion plot on:", meta_char)
-  plot_dispersion_deseq2(dds, filepath=file.path(folder_results, filename), title=title, subtitle=design_char)
+  plot_dispersion_deseq2(dds, 
+                         filepath=file.path(folder_results, 
+                                            paste0("deseq2_dispersion_", meta_char, "_", design_char, ".pdf")),
+                         title=paste("Dispersion plot on:", meta_char),
+                         subtitle=design_char)
 
   # 3. results w/wo lcf shrinkage ===========================================================================================
   
@@ -132,25 +158,22 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
   # Extract table results with base means, log2 fold changes, standard errors, test statistics,
   # p-values, adjusted p-values for different priors over LFC.
 
-  if (is.null(contrasts)){
-    contrasts <- resultsNames(dds)
-    contrasts <- contrasts[contrasts != "Intercept"]
-    contrasts <- sapply(contrasts, list)
-  }
-
   cat("Computing results tables for each for the following contrasts...\n\t")
-  cat(paste(contrasts, collapse="\n\t"), "\n")
-
-  table_results_all <- data.frame()
+  cat(paste(lapply(names(contrasts), function(x) paste0(x," = ",contrasts[[x]])), collapse="\n\t"), "\n")
+  df_results_all <- data.frame()
 
   for (contrast_name in names(contrasts)){
+    contrast <- contrasts[[contrast_name]]
+    contrast_vec <- get_contrast_vector(contrast=contrast, 
+                                        design=design, data=as.data.frame(colData(object)))
+
     # No LFC shrinkage
     # The statistic is based on the MLE of LFC
     resLFC_MLE <- results(object=dds,
-                          contrast=contrasts[[contrast_name]],
-                          lfcThreshold=lfcThreshold,         # if specifying lfcThreshold, tests are Wald tests
-                          altHypothesis=altHypothesis,
-                          alpha=alpha,                       # for p-value adjustment level
+                          contrast=contrast_vec,
+                          lfcThreshold=lfc_test_threshold,         # if specifying lfcThreshold, tests are Wald tests
+                          altHypothesis=lfc_test_alt_hypothesis,
+                          alpha=alpha,                             # for p-value adjustment level
                           filter=mcols(dds)$baseMean,
                           independentFiltering=T,            # for choosing genes whose p-values will be ajdusted
                           pAdjustMethod="BH",
@@ -158,46 +181,40 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
                           parallel=T,
                           BPPARAM=BPPARAM)
 
-    lfc_description <- attr(resLFC_MLE, "elementMetadata")[2,"description"]
-
     # WARNING: the p-values are unchanged, only lfc and lfcSE change (with lfcSE being a posterior SD here).
     resLFC_shrink <- NULL
 
-    if (is.null(lfcShrink_type)){
+    if (is.null(lfc_fit_shrink_type)){
       resLFC_shrink <- NULL
-    } else if (lfcShrink_type=="normal"){
+    } else if (lfc_fit_shrink_type=="normal"){
       if (any(attr(terms.formula(design(dds)),"order") > 1)){
         cat("Interactions with lfcShrink='normal' is not implemented. Skipping.\n")
       } else {
       # Normal LFC prior is a zero-centered Gaussian (original in DESeq2). Not available with interactions.
       resLFC_shrink <- lfcShrink(dds=dds, 
-                                 contrast=contrasts[[contrast_name]],
-                                 type=lfcShrink_type,
+                                 contrast=contrast_vec,
+                                 type=lfc_fit_shrink_type,
                                  format="DataFrame",
                                  parallel=T,
                                  BPPARAM=BPPARAM)
       }
-    } else if(lfcShrink_type=="apeglm"){
-      if (length(contrasts[[contrast_name]])>1){
+    } else if(lfc_fit_shrink_type=="apeglm"){
+      if (sum(contrast_vec==1) != 1){
+          cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
+      } else if (resultsNames(dds)[contrast_vec==1] != rownames(contrast_vec)[contrast_vec==1]){
           cat("Contrasts that are not coefficient names for lfcShrink='apeglm' is not implemented. Skipping.\n")
       } else {
         # Apeglm sets a Cauchy prior with null location
         resLFC_shrink <- lfcShrink(dds=dds, 
-                                   coef=unlist(contrasts[[contrast_name]]),
-                                   type=lfcShrink_type,
+                                   coef=resultsNames(dds)[contrast_vec==1],
+                                   type=lfc_fit_shrink_type,
                                    format="DataFrame",
                                    parallel=T,
                                    BPPARAM=BPPARAM)
       }
     }
-  
-    plot_MA_deseq2(resLFC_MLE=resLFC_MLE,
-                   resLFC_shrink=resLFC_shrink,
-                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, "_", design_char, ".pdf")), 
-                   title=paste("LFC over mean norm counts on:", meta_char),
-                   subtitle=paste(design_char, lfc_description))
 
-    # summary of results
+    # NOTE: on results summary
     #
     # if "svalue" not in names of the results object (when is it the case?), outliers and low counts
     #   outlier <- sum(object$baseMean > 0 & is.na(object$pvalue)) (value after "outliers [1] :")
@@ -210,47 +227,58 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
     #   } else {
     #     ft <- round(metadata(object)$filterThreshold)
     #   }
-
-    # default filter value for independent filtering is the baseMean (mean of normalized counts) of the dds object
-    # the number of low counts variable should be
-    #   sum(mcols(dds)$baseMean <= round(metadata(resLFC_shrink)[["filterThreshold"]]))
-
+  
     # save MA plot
     # "In DESeq2, the function plotMA shows the log2 fold changes attributable to a given variable over the mean of 
     # normalized counts for all the samples in the DESeqDataSet. Points will be colored red if the adjusted p value is
     # less than 0.1. Points which fall out of the window are plotted as open triangles pointing either up or down."
 
-    # table of results
-    if (only_significant){
-      keep <- !is.na(resLFC_MLE$padj) & resLFC_MLE$padj < alpha
-    } else {
-      keep <- rep(T, nrow(resLFC_MLE))
-    }
+    plot_MA_deseq2(resLFC_MLE=resLFC_MLE,
+                   resLFC_shrink=resLFC_shrink,
+                   filepath=file.path(folder_results, paste0("deseq2_ma_", meta_char, "_", design_char, ".pdf")), 
+                   title=paste("LFC over mean norm counts on:", meta_char),
+                   subtitle=paste("design:", design_char, "     contrast:", contrast_name))
 
-    if (grepl("contrast_ref", contrast_name)){
-      contrast_char <- sub("contrast_ref_", "\\2", contrast_name)
-    } else {
-      contrast_char <- sub("(.*)(?=:\\s):\\s", "\\2", lfc_description, perl=T)
-    }
+    # 4 build contrast-specific table of results =======================================================================
 
-    tags <- list("meta"=meta_char, "design"=design_char, "contrast"=contrast_char)
-    extra <- list(time=as.character(Sys.time()))
-    table_results <- cbind.data.frame(c(tags, extra), resLFC_MLE[keep,])
-    table_results <- cbind.data.frame(rowData(object[keep,]), table_results)
-    
-    if (save_table){
-      save_update_table(file_table_results, table_results, tags)
-    }
+    # statistic (Wald or LRT)
+    stat <- resLFC_MLE$stat
 
-    table_results_all <- rbind(table_results_all, table_results)
+    # unadjusted pvalues
+    pval <- resLFC_MLE$pvalue
+ 
+    # adjusted pvalues
+    padj <- resLFC_MLE$padj
+
+    # beta
+    betas <- resLFC_MLE$log2FoldChange
+
+    df_results_all <- make_table_results(res_data=list(beta=betas, stat=stat, pval=pval, padj=padj),
+                                         tags=list(meta=meta_char, design=design_char, contrast=contrast_name),
+                                         only_significant=only_significant, alpha=alpha,
+                                         df_results_all=df_results_all,
+                                         df_row=rowData(object),
+                                         file_table_results=file_table_results)
+
   }
 
-  table_results_all
+  df_results_all 
 }
 
 #' Run edgeR algorithm.
 #' 
 #' @author Yoann Pradat
+#'
+#' @param object a \code{SummarizedExperiment} object
+#' @param design a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be 
+#' present in the \code{colData} of object
+#' @param contrasts a character vector specifying the contrasts (one or multiple beta coefficient) to 
+#' be used for making tests and building results table. 
+#' @param opts_algo a named list of options specific to edgeR
+#' @param opts_comm a named list of options common to all methods
+#'
+#' @import edgeR
+#' @importFrom stats p.adjust
 #'
 #' @references
 #' Robinson MD, McCarthy DJ, Smyth GK (2010). “edgeR: a Bioconductor package for differential expression analysis of
@@ -258,15 +286,25 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 #'
 #' McCarthy DJ, Chen Y, Smyth GK (2012). “Differential expression analysis of multifactor RNA-Seq experiments with
 #' respect to biological variation.” Nucleic Acids Research, 40(10), 4288-4297. \url{https://doi.org/10.1093/nar/gks042}
-run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
+run_edgeR <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
+
   # 0. options and settings ============================================================================================
 
-  # Options for the function \code{estimateDisp}
+  # Options for dispersion fitting
   disp_trend_method <- opts_algo$disp_trend_method
-  disp_robust <- opts_algo$disp_robust
+  disp_robust_prior_df <- opts_algo$disp_robust_prior_df
+  disp_robust_prior_ql <- opts_algo$disp_robust_prior_ql
+
+  # Options for lfc fitting and testing
+  # Either
+  # - QL: then use the functions glmQLFit and glmQLTest. This is the preferred and default option.
+  # - LRT: then use the functions glmFit, glmLRT
+  lfc_test_type <- match.arg(opts_algo$lfc_test_type, c("QL", "LRT"))
+  lfc_test_threshold <- opts_algo$lfc_test_threshold
+  lfc_fit_robust_prior_ql_disp <- opts_algo$lfc_fit_robust_prior_ql_disp
+  alpha <- opts_comm$alpha
 
   # Options for saving
-  save_table <- opts_comm$save_table
   only_significant <- opts_comm$only_significant
 
   # init results folder
@@ -274,7 +312,11 @@ run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
   dir.create(folder_results, showWarnings=F, recursive=T)
 
   # used only if save_table is TRUE
-  file_table_results <- file.path(folder_results, "table_results.txt")
+  if (opts_comm$save_table){
+    file_table_results <- file.path(folder_results, "table_results.txt")
+  } else {
+    file_table_results <- NULL
+  }
 
   # for file names and plot titles
   meta_char <- paste(lapply(metadata(object), function(x) paste(x, collapse="_")), collapse="-")
@@ -287,7 +329,7 @@ run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
   # design matrix
   design_matrix <- model.matrix(design, data=colData(object))
 
-  # 2. fit the dispersions and LFCs ====================================================================================
+  # 2. fit the dispersions =============================================================================================
 
   # equivalent to running sucessively
   #   object <- estimateGLMCommonDisp(object, design)
@@ -299,9 +341,106 @@ run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
   dgel <- estimateDisp(dgel, design_matrix,
                        prior.df=NULL,
                        trend.method=disp_trend_method,
-                       robust=disp_robust)
+                       robust=disp_robust_prior_df)
 
-  return(T)
+  # save plot dispersion
+  plot_dispersion_edgeR(dgel=dgel, 
+                        filepath=file.path(folder_results, 
+                                           paste0("edgeR_dispersion_", meta_char, "_", design_char, ".pdf")),
+                        title=paste("Dispersion plot on:", meta_char), subtitle=design_char)
+
+  # 3. fit the LFCs and compute test ===================================================================================
+
+  if (lfc_test_type == "QL"){
+    # fit
+    glm_fit <- glmQLFit(dgel, design_matrix, 
+                        winsor.tail.p=c(0.05,0.1),
+                        abundance.trend=TRUE,
+                        robust=lfc_fit_robust_prior_ql_disp)
+
+    # save plot QL dispersion
+    plot_dispersion_ql_edgeR(glm_fit=glm_fit, 
+                             filepath=file.path(folder_results, 
+                                                paste0("edgeR_dispersion_ql_", meta_char, "_", design_char, ".pdf")),
+                             title=paste("QL Dispersion plot on:", meta_char), subtitle=design_char)
+
+  } else if (lfc_test_type == "LRT") {
+    # fit
+    # TODO: clarify the role of prior.count parametrs
+    glm_fit <- glmFit(dgel, design_matrix, 
+                      prior.count=0.125)
+
+    # one can extract beta coefficients with
+    #   predbeta <- predFC(y=dgel$counts, design_matrix, prior.count=0.125,  offset=getOffset(dgel), 
+    #                      dispersion=dgel$tagwise.dispersion)
+    # or individually for each beta name after running glmLRT with
+    #   predbeta[[beta_name]] <- glm_test$table$logFC
+
+  }
+
+
+  cat("Computing results tables for each for the following contrasts...\n\t")
+  cat(paste(lapply(names(contrasts), function(x) paste0(x," = ",contrasts[[x]])), collapse="\n\t"), "\n")
+  df_results_all <- data.frame()
+
+  for (contrast_name in names(contrasts)){
+    contrast <- contrasts[[contrast_name]]
+    contrast_vec <- get_contrast_vector(contrast=contrast, 
+                                        design=design, data=as.data.frame(colData(object)))
+
+    # F-test
+    #   - if poisson.bound=T, the pvalue returned will not be less than the pval that would be  obtained for a LRT 
+    #     with NB dispersion set to 0
+    #
+    # for lfc=0 with a glm fit from glmQLFit, glmTreat automatically calls glmLRT i.e
+    #   glm_test <- glmQLFTest(glmfit=glm_fit,
+    #                          contrast=contrast_vec,
+    #                          poisson.bound=T)
+
+    # LRT
+    #
+    # for lfc=0 with a glm fit from glmFit, glmTreat automatically calls glmLRT i.e
+    #   glm_test <- glmLRT(glmfit=glm_fit,
+    #                      contrast=contrast_vec)
+
+    glm_test <- glmTreat(glm_fit,
+                         contrast=contrast_vec,
+                         lfc=lfc_test_threshold)
+
+    # 4 build contrast-specific table of results =======================================================================
+
+    # statistic (LRT or F)
+    if (lfc_test_type == "QL"){
+      stat <- glm_test$table$F
+    } else if (lfc_test_type == "LRT") {
+      stat <- glm_test$table$LR
+    }
+
+    # unadjusted pvalues
+    pval <- glm_test$table$PValue
+
+    # adjusted pvalues
+    padj <- p.adjust(pval, method="BH")
+
+    # beta
+    #
+    # NOTE:
+    # in the code of DESeq2Paper, beta coeffs for edgeR are obtained using
+    #   log2(exp(1))*glm_fit$coefficients
+    # which is equal to
+    #   glm_test$table
+    # for the particular coefficients tested
+    betas <- glm_test$table$logFC
+
+    df_results_all <- make_table_results(res_data=list(beta=betas, stat=stat, pval=pval, padj=padj),
+                                         tags=list(meta=meta_char, design=design_char, contrast=contrast_name),
+                                         only_significant=only_significant, alpha=alpha,
+                                         df_results_all=df_results_all,
+                                         df_row=rowData(object),
+                                         file_table_results=file_table_results)
+  }
+
+  df_results_all
 }
 
 #' Run limma algorithm.
@@ -317,4 +456,3 @@ run_edgeR <- function(object, design=NULL, opts_algo, opts_comm){
 run_limma <- function(object){
   return(T)
 }
-

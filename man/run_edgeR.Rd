@@ -4,7 +4,20 @@
 \alias{run_edgeR}
 \title{Run edgeR algorithm.}
 \usage{
-run_edgeR(object, design = NULL, opts_algo, opts_comm)
+run_edgeR(object, design = NULL, contrasts, opts_algo, opts_comm)
+}
+\arguments{
+\item{object}{a \code{SummarizedExperiment} object}
+
+\item{design}{a formula specifying the design for the model matrix of DESeq2. Any variable appearing should be
+present in the \code{colData} of object}
+
+\item{contrasts}{a character vector specifying the contrasts (one or multiple beta coefficient) to
+be used for making tests and building results table.}
+
+\item{opts_algo}{a named list of options specific to edgeR}
+
+\item{opts_comm}{a named list of options common to all methods}
 }
 \description{
 Run edgeR algorithm.

@@ -10,9 +10,9 @@ object_example <- SummarizedExperiment::SummarizedExperiment(assays=SummarizedEx
 designs_run <- list("design_1"= ~ genotype + condition + genotype:condition, 
                     "design_2"= ~ genotype + genotype:condition)
 
-# contrast_1: the condition effect for genotype I (the main effect)
-contrasts_run <- list("design_1"=list("contrast_1"=list("condition_B_vs_A")),
-                      "design_2"=list("contrast_1"=list("genotypeI.conditionB")))
+# genotype_I.condition_B_vs_A: the condition effect for genotype I (the main effect)
+contrasts_run <- list("design_1"=list("genotype_I.condition_B_vs_A"="condition_B_vs_A"),
+                      "design_2"=list("genotype_I.condition_B_vs_A"="genotypeI.condition_B_vs_A"))
 
 # load options
 opts <- list()
