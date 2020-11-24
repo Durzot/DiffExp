@@ -123,6 +123,7 @@
 #' @param data a data.frame used for building the model matrix
 #'
 #' @importFrom limma makeContrasts
+#' @importFrom stats model.matrix
 #'
 #' @author Yoann Pradat
 #'

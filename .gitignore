@@ -2,6 +2,7 @@
 tools/DESeq2paper/data
 tests/**/*.pdf
 tests/**/*.txt
+data/tcga_brca.R
 
 # Tex build
 docs/**/build/**/*.*

@@ -1,6 +1,6 @@
 Package: DiffExp
 Title: Runs different methods of differential expression analysis
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: 
     person(given = "Yoann",
            family = "Pradat",
@@ -17,8 +17,11 @@ Imports:
     BiocParallel,
     DESeq2,
     edgeR,
+    limma,
     S4Vectors,
     statmod,
     SummarizedExperiment
+Depends: 
+    R (>= 3.5.0)
 Suggests: 
     testthat

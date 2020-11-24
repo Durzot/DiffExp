@@ -13,6 +13,9 @@
 #' @param title a character
 #' @param subtitle (optional) a character
 #'
+#' @importFrom graphics mtext par text
+#' @importFrom grDevices dev.off pdf
+#'
 #' @keywords internal
 plot_dispersion_deseq2 <- function(dds, filepath, title, subtitle=NULL){
   pdf(file = filepath,
@@ -57,6 +60,9 @@ plot_dispersion_deseq2 <- function(dds, filepath, title, subtitle=NULL){
 #' @param subtitle (optional) a character
 #' @param alpha a float passed to \code{\link[DESeq2]{plotMA}}
 #' @param ylim a length-2 float vector passed to \code{\link[DESeq2]{plotMA}}
+#'
+#' @importFrom graphics mtext par text
+#' @importFrom grDevices dev.off pdf
 #'
 #' @importFrom DESeq2 plotMA
 #'
@@ -127,6 +133,9 @@ plot_MA_deseq2 <- function(resLFC_MLE, resLFC_shrink=NULL, filepath, title, subt
 #' @param title a character
 #' @param subtitle (optional) a character
 #'
+#' @importFrom graphics mtext par text
+#' @importFrom grDevices dev.off pdf
+#'
 #' @keywords internal
 plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
   pdf(file = filepath,
@@ -172,6 +181,9 @@ plot_dispersion_edgeR <- function(dgel, filepath, title, subtitle=NULL){
 #' @param filepath a character specifying the path to the plot file
 #' @param title a character
 #' @param subtitle (optional) a character
+#'
+#' @importFrom graphics mtext par text
+#' @importFrom grDevices dev.off pdf
 #'
 #' @keywords internal
 plot_dispersion_ql_edgeR <- function(glm_fit, filepath, title, subtitle=NULL){

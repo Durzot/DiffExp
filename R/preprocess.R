@@ -11,6 +11,7 @@
 #' @param opts a named list of options. See \code{\link{opts_prepro}}
 #'  
 #' @importFrom edgeR filterByExpr calcNormFactors
+#' @importFrom stats model.matrix
 #'
 #' @author Yoann Pradat
 #' @export

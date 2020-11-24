@@ -25,6 +25,7 @@
 #'
 #' @import DESeq2
 #' @importFrom BiocParallel MulticoreParam
+#' @importFrom stats terms.formula
 #'
 #' @author Yoann Pradat
 #'
@@ -429,6 +430,8 @@ run_edgeR <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 #' Run limma algorithm.
 #' 
 #' @author Yoann Pradat
+#'
+#' @import edgeR
 #'
 #' @references
 #' Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W, Smyth GK (2015). “limma powers differential expression analyses for

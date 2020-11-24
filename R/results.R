@@ -88,6 +88,8 @@ update_table <- function(tab, tab_new, tags){
 #' @param tab_new a data.frame
 #' @param tags named list of tags values to decide between merging and updating if a table already exists at file
 #'
+#' @importFrom utils read.table write.table
+#'
 #' @author Yoann Pradat
 #' @keywords internal
 save_update_table <- function(file, tab_new, tags, verbose=T){
