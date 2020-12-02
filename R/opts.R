@@ -40,7 +40,6 @@ opts_prepro <- function(design=NULL,
   prepro <- list(design=design,
                  min_count=min_count,
                  min_total_count=min_total_count,
-                 norm_factors_method=norm_factors_method,
                  large_n=large_n,
                  min_prop=min_prop,
                  norm_factors_method=norm_factors_method)
