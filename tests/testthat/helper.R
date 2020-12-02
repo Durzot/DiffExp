@@ -16,7 +16,9 @@ contrasts_run <- list("design_1"=list("genotype_I.condition_B_vs_A"="conditionB"
 
 # load options
 opts <- list()
-opts[["diffexp"]] <- opts_diffexp(ncores=6, save_table=T, only_significant=T)
+opts[["diffexp"]] <- opts_diffexp(alpha=0.1, ncores=6, save_table=T, only_significant=T, folder_results="./results",
+                                  deseq2=list(file_results="tables_results/table_results_deseq2.tsv"),
+                                  edgeR=list(file_results="tables_results/table_results_edgeR.tsv"))
 opts[["prepro"]] <- opts_prepro(min_count=0, min_total_count=15)
 
 # clean previous run results

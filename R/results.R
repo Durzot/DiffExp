@@ -104,5 +104,7 @@ save_update_table <- function(file, tab_new, tags, verbose=T){
       cat(paste("updated table at", file), "\n")
     }
   }
+
+  dir.create(dirname(file), showWarnings=F, recursive=T)
   write.table(tab_new, file=file, sep="\t", row.names=F, quote=F)
 }
