@@ -1,4 +1,4 @@
-# @modified: 16 Nov 2020
+# @modified: 02 Dec 2020
 # @created: 28 Oct 2020
 # @author: Yoann Pradat
 # 
@@ -56,6 +56,8 @@ opts_prepro <- function(design=NULL,
 #' @param save_table boolean to decide whether to save tables in txt files or not
 #' @param only_significant boolean to decide whether only significant (FDR) variables are kept in the results tables
 #' or not
+#' @param folder_results name of the folder where results will be stored 
+#' @param file_table_results name of the file where the tsv table of results will be stored
 #' @param use_deseq2 boolean to choose to run DESeq2.
 #' @param use_edgeR boolean to choose to run edgeR.
 #' @param use_limma boolean to choose to run limma.
@@ -71,6 +73,7 @@ opts_diffexp <- function(alpha=0.1,
                          save_table=T,
                          only_significant=T,
                          folder_results="./results",
+                         file_table_results="table_results.tsv",
                          use_deseq2=T,
                          use_edgeR=T,
                          use_limma=F, ...){
@@ -79,13 +82,14 @@ opts_diffexp <- function(alpha=0.1,
                  ncores=ncores,
                  save_table=save_table,
                  only_significant=only_significant,
-                 folder_results=folder_results)
+                 folder_results=folder_results,
+                 file_table_results="table_results.tsv")
 
   deseq2 <- list(run=use_deseq2, 
                  lfc_fit_shrink_type="apeglm",
                  lfc_test_alt_hypothesis="greaterAbs",
                  lfc_test_threshold=0,
-                 file_results="table_results.tsv")
+                 file_table_results=common$file_table_results)
 
   edgeR <- list(run=use_edgeR,
                 disp_trend_method="locfit",
@@ -93,7 +97,7 @@ opts_diffexp <- function(alpha=0.1,
                 lfc_fit_robust_prior_ql_disp=TRUE,
                 lfc_test_type=c("QL","LRT"),
                 lfc_test_threshold=0,
-                file_results="table_results.tsv")
+                file_table_results=common$file_table_results)
 
   limma <- list(run=use_limma)
 

@@ -1,4 +1,4 @@
-# @modified: 17 Nov 2020
+# @modified: 02 Dec 2020
 # @created: 12 Nov 2020
 # @author: Yoann Pradat
 # 
@@ -57,7 +57,7 @@ run_deseq2 <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
   dir.create(folder_results, showWarnings=F, recursive=T)
 
   if (opts_comm$save_table) {
-    file_table_results <- file.path(folder_results, opts_algo$file_results)
+    file_table_results <- file.path(folder_results, opts_algo$file_table_results)
   } else {
     file_table_results <- NULL
   }
@@ -296,7 +296,7 @@ run_edgeR <- function(object, design=NULL, contrasts, opts_algo, opts_comm){
 
   # used only if save_table is TRUE
   if (opts_comm$save_table){
-    file_table_results <- file.path(folder_results, opts_algo$file_results)
+    file_table_results <- file.path(folder_results, opts_algo$file_table_results)
   } else {
     file_table_results <- NULL
   }
