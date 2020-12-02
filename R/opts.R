@@ -83,7 +83,7 @@ opts_diffexp <- function(alpha=0.1,
                  save_table=save_table,
                  only_significant=only_significant,
                  folder_results=folder_results,
-                 file_table_results="table_results.tsv")
+                 file_table_results=file_table_results)
 
   deseq2 <- list(run=use_deseq2, 
                  lfc_fit_shrink_type="apeglm",
