@@ -38,7 +38,6 @@ load_to_deseq2 <- function(object, design=NULL){
 #' Transform \code{SummarizedExperiment} object to \code{DGEList} object.
 #'
 #' @param object a \code{SummarizedExperiment} object
-#' @param design a formula that expresses how the counts for each variable depend on the variables in
 #' \code{colData}
 #'
 #' @import SummarizedExperiment

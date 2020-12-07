@@ -145,40 +145,24 @@ get_contrast_vector <- function(contrast, design, data){
 
 #' Build a list of character contrasts of B-A for an interacting variable.
 #' 
-#' @param condition the factor vector of condition values
-#' @param interaction the factor vector of interaction values
+#' @param levels_cond the factor levels of the condition variable
+#' @param levels_inte the factor levels of the interaction variable
 #' @param cond_name the name of the condition variable
 #' @param inte_name the name of the interaction variable
 #' @param level_B_cond the B level to be contrasted with A
 #' @param level_A_cond the A level to be contrasted with B
 #' @param cond_main_effect is the condition a main effect
 #' @param inte_main_effect is the interaction a main effect
-#'
-#' @author Yoann Pradat
-#'
-#' @export
-get_contrast_condition_B_minus_A_factors_interaction <- function(condition, interaction, cond_name="condition",
+get_contrast_condition_B_minus_A_factors_interaction <- function(levels_cond, levels_inte, cond_name="condition",
                                                                  inte_name="interaction",
                                                                  level_B_cond=NULL, 
                                                                  level_A_cond=NULL, 
                                                                  cond_main_effect=T, inte_main_effect=F){
 
-  if (!is.factor(condition)){
-    stop("condition is not a factor")
-  }
-
-  if (!is.factor(interaction)){
-    stop("condition is not a factor")
-  }
-
   if (!cond_main_effect & !inte_main_effect){
     stop("when using an interaction between two factor variables, at least one variable should be a main effect")
   }
 
-  condition <- droplevels(condition)
-  interaction <- droplevels(interaction)
-  levels_cond <- levels(condition)
-  levels_inte <- levels(interaction)
   ref_cond <- levels_cond[1]
   ref_inte <- levels_inte[1]
 

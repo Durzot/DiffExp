@@ -1,6 +1,6 @@
 Package: DiffExp
 Title: Runs different methods of differential expression analysis
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: 
     person(given = "Yoann",
            family = "Pradat",

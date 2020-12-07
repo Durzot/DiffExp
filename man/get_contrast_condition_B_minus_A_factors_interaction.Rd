@@ -5,8 +5,8 @@
 \title{Build a list of character contrasts of B-A for an interacting variable.}
 \usage{
 get_contrast_condition_B_minus_A_factors_interaction(
-  condition,
-  interaction,
+  levels_cond,
+  levels_inte,
   cond_name = "condition",
   inte_name = "interaction",
   level_B_cond = NULL,
@@ -16,9 +16,9 @@ get_contrast_condition_B_minus_A_factors_interaction(
 )
 }
 \arguments{
-\item{condition}{the factor vector of condition values}
+\item{levels_cond}{the factor levels of the condition variable}
 
-\item{interaction}{the factor vector of interaction values}
+\item{levels_inte}{the factor levels of the interaction variable}
 
 \item{cond_name}{the name of the condition variable}
 
@@ -34,7 +34,4 @@ get_contrast_condition_B_minus_A_factors_interaction(
 }
 \description{
 Build a list of character contrasts of B-A for an interacting variable.
-}
-\author{
-Yoann Pradat
 }

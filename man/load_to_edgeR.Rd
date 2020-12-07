@@ -7,9 +7,7 @@
 load_to_edgeR(object)
 }
 \arguments{
-\item{object}{a \code{SummarizedExperiment} object}
-
-\item{design}{a formula that expresses how the counts for each variable depend on the variables in
+\item{object}{a \code{SummarizedExperiment} object
 \code{colData}}
 }
 \description{

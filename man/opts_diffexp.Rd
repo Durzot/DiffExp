@@ -10,6 +10,7 @@ opts_diffexp(
   save_table = T,
   only_significant = T,
   folder_results = "./results",
+  file_table_results = "table_results.tsv",
   use_deseq2 = T,
   use_edgeR = T,
   use_limma = F,
@@ -25,6 +26,10 @@ opts_diffexp(
 
 \item{only_significant}{boolean to decide whether only significant (FDR) variables are kept in the results tables
 or not}
+
+\item{folder_results}{name of the folder where results will be stored}
+
+\item{file_table_results}{name of the file where the tsv table of results will be stored}
 
 \item{use_deseq2}{boolean to choose to run DESeq2.}
 
