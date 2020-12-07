@@ -153,6 +153,10 @@ get_contrast_vector <- function(contrast, design, data){
 #' @param level_A_cond the A level to be contrasted with B
 #' @param cond_main_effect is the condition a main effect
 #' @param inte_main_effect is the interaction a main effect
+#'
+#' @author Yoann Pradat
+#'
+#' @export
 get_contrast_condition_B_minus_A_factors_interaction <- function(levels_cond, levels_inte, cond_name="condition",
                                                                  inte_name="interaction",
                                                                  level_B_cond=NULL, 
